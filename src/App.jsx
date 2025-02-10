@@ -1,5 +1,5 @@
 import './App.css'
-import UseFetch from './components/UseFetch'
+import { UseFetch } from './components/UseFetch'
 
 function App() {
 
@@ -12,9 +12,9 @@ function App() {
     <>
       <div className='w-full h-full flex justify-center items-center'>
         {datos.map(
-          (item) => (
-            <div key={item.id}>
-              <h2>{item.nombre}</h2>
+          (aso) => (
+            <div key={aso.id}>
+              <h2>{aso.nombre}</h2>
             </div>
           )
         )}
