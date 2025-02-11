@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const UseFetch = (url) => {
+export const useFetch = (url) => {
 
     const [datos, setDatos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -11,15 +11,13 @@ export const UseFetch = (url) => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                setDatos(data);
+                setDatos(data.data);
                 setLoading(false)
             })
             .catch(err => {
                 setError(err.message);
                 setLoading(false)
             })
-
-        console.log("Datos Api:", datos);
     })
 
     useEffect(() => {
