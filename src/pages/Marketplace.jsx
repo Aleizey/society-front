@@ -9,7 +9,7 @@ const Marketplace = () => {
                 </span>
                 <img className="hover:brightness-75 transition-all absolute w-full h-full object-cover" src="https://cdn.pixabay.com/photo/2016/11/19/20/17/catwalk-1840941_1280.jpg" alt="" />
             </div> */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-20 mt-30 lg:px-20 ">
+            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-20 mt-12 lg:px-20 ">
                 <div className="bg-red-800 w-full h-[500px] rounded-2xl"></div>
                 <div className="bg-red-800 w-full h-[500px] rounded-2xl"></div>
                 <div className="bg-red-800 w-full h-[500px] rounded-2xl"></div>

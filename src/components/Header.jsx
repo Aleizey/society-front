@@ -6,7 +6,7 @@ const Header = () => {
 
     return (
         <>
-            <div className=" absolute w-full min-h-min top-0 z-3">
+            <div className=" sticky w-full min-h-min top-0 z-3">
                 <div className="bg-sky-400 text-white text-xs py-1.5 flex justify-center items-center">
                     FREE CLUB OF ASOCIACIONES | CANARY ISLAND
                 </div>
