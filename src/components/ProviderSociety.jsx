@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 // import ApiLoading from './ApiLoading';
 // import ApiError from './ApiError';
 import { useFetch } from './UseFetch';
@@ -6,7 +6,8 @@ import { useFetch } from './UseFetch';
 export const SocietyContext = createContext();
 
 const ProviderSociety = ({ children }) => {
-    const { datos, error, loading } = useFetch("https://api.tvmaze.com/shows");
+    const { datos, error, loading } = useFetch("https://adrian.informaticamajada.es/api/asociaciones", "GET");
+    const asociaciones = datos;
 
     console.log(error)
     console.log(loading)
@@ -14,7 +15,7 @@ const ProviderSociety = ({ children }) => {
     // if (loading) return <ApiLoading />;
 
     return (
-        <SocietyContext.Provider value={{ datos }}>
+        <SocietyContext.Provider value={{ asociaciones }}>
             {children}
         </SocietyContext.Provider>
     );
