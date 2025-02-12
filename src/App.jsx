@@ -1,26 +1,25 @@
+import { Route, Routes } from 'react-router'
 import './App.css'
-import { useFetch } from './components/UseFetch'
+import NotFound from './pages/NotFound'
+import Primary from './pages/Primary'
+import Layout from './components/Layout'
+
+import ProviderSociety from './components/ProviderSociety'
+import Marketplace from './pages/Marketplace'
 
 function App() {
 
-  const { datos, error, loading } = useFetch("https://adrian.informaticamajada.es/api/asociaciones");
-
-  console.log("Hola", datos)
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
-
   return (
     <>
-      <div className='w-full h-full flex flex-col justify-center items-center'>
-        {datos.map((aso) => (
-          <div key={aso.id}>
-            <p>{aso.nif}</p>
-            <h2>{aso.nombre}</h2>
-            <p>{aso.descripcion ? aso.descripcion : "No hay descripción"}</p>
-            <img src={aso.imagen} alt="" width={100} />
-          </div>
-        ))}
-      </div>
+      <ProviderSociety>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Primary />} />
+            <Route path="/shop" element={<Marketplace />} />
+          </Route>
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </ProviderSociety>
     </>
   )
 }
