@@ -1,13 +1,11 @@
 import { useContext, useState } from "react";
 import { SocietyContext } from "../components/ProviderSociety";
 import { useFetch } from "../components/UseFetch";
-
 const Primary = () => {
 
     const { asociaciones } = useContext(SocietyContext);
     return (
         <>
-
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-15 mt-12 lg:px-20 ">
                 {asociaciones.map(dataAso => (
