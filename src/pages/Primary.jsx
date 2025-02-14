@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { SocietyContext } from "../components/ProviderSociety";
-import { useFetch } from "../components/UseFetch";
+import { Link } from "react-router";
+
 const Primary = () => {
 
     const { asociaciones } = useContext(SocietyContext);
@@ -24,7 +25,7 @@ const Primary = () => {
 
                         </div>
                         <div className="flex justify-between py-1.5 px-1.5">
-                            <button className="bg-sky-700 rounded-2xl text-ellipsis text-nowrap overflow-hidden rounded-e-none border-e-2 font-bold text-white p-2 w-full hover:bg-sky-950 transition-all cursor-pointer">VIEW</button>
+                            <Link to={`/asociacion/${dataAso.id}`} className="bg-sky-700 rounded-2xl text-ellipsis text-nowrap overflow-hidden rounded-e-none border-e-2 font-bold text-white p-2 w-full hover:bg-sky-950 transition-all cursor-pointer">VIEW</Link>
                             <button className="bg-sky-700 rounded-2xl text-ellipsis text-nowrap overflow-hidden rounded-s-none border-s-2 font-bold text-white p-2 w-full hover:bg-sky-950 transition-all cursor-pointer">JOIN ASOCIACION</button>
                         </div>
                     </div>
