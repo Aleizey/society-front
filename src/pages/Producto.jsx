@@ -94,28 +94,28 @@ function Producto() {
                             </div>
 
                             {/* Tallas */}
-                            <div class="flex space-x-2 pb-4">
+                            <div className="flex space-x-2 pb-4">
 
-                                <label class="text-center">
+                                <label className="text-center">
 
                                     <input type="radio"
-                                        class="flex items-center justify-center w-6 h-6 accent-violet-600 bg-gray-100 rounded-lg dark:bg-gray-600"
+                                        className="flex items-center justify-center w-6 h-6 accent-violet-600 bg-gray-100 rounded-lg dark:bg-gray-600"
                                         name="size" value="xs" />XS
                                 </label>
-                                <label class="text-center">
-                                    <input type="radio" class="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
+                                <label className="text-center">
+                                    <input type="radio" className="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
                                         value="s" />S
                                 </label>
-                                <label class="text-center">
-                                    <input type="radio" class="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
+                                <label className="text-center">
+                                    <input type="radio" className="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
                                         value="m" />M
                                 </label>
-                                <label class="text-center">
-                                    <input type="radio" class="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
+                                <label className="text-center">
+                                    <input type="radio" className="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
                                         value="l" />L
                                 </label>
-                                <label class="text-center">
-                                    <input type="radio" class="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
+                                <label className="text-center">
+                                    <input type="radio" className="flex items-center justify-center w-6 h-6 accent-violet-600" name="size"
                                         value="xl" />XL
                                 </label>
                             </div>
@@ -156,65 +156,65 @@ function Producto() {
             </div>
 
             {/* Comentarios */}
-            <section class="bg-gray-100 py-8">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-2xl font-bold mb-4">Customer Comments</h2>
+            <section className="bg-gray-100 py-8">
+                <div className="container mx-auto px-4">
+                    <h2 className="text-2xl font-bold mb-4">Customer Comments</h2>
 
-                    <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-lg shadow">
-                            <div class="flex items-center mb-2">
-                                <img src="https://via.placeholder.com/40" alt="User Avatar" class="w-10 h-10 rounded-full mr-3" />
+                    <div className="space-y-4">
+                        <div className="bg-white p-4 rounded-lg shadow">
+                            <div className="flex items-center mb-2">
+                                <img src="https://via.placeholder.com/40" alt="User Avatar" className="w-10 h-10 rounded-full mr-3" />
                                 <div>
-                                    <h3 class="font-semibold">John Doe</h3>
-                                    <p class="text-sm text-gray-500">Posted on March 15, 2024</p>
+                                    <h3 className="font-semibold">John Doe</h3>
+                                    <p className="text-sm text-gray-500">Posted on March 15, 2024</p>
                                 </div>
                             </div>
-                            <p class="text-gray-700">Great product! I've been using it for a week now and I'm very satisfied with its
+                            <p className="text-gray-700">Great product! I've been using it for a week now and I'm very satisfied with its
                                 performance.</p>
-                            <div class="flex items-center mt-2">
-                                <button class="text-blue-500 hover:text-blue-600 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
+                            <div className="flex items-center mt-2">
+                                <button className="text-blue-500 hover:text-blue-600 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                                     </svg>
                                     Like
                                 </button>
-                                <button class="text-gray-500 hover:text-gray-600">Reply</button>
+                                <button className="text-gray-500 hover:text-gray-600">Reply</button>
                             </div>
                         </div>
 
-                        <div class="bg-white p-4 rounded-lg shadow">
-                            <div class="flex items-center mb-2">
-                                <img src="https://via.placeholder.com/40" alt="User Avatar" class="w-10 h-10 rounded-full mr-3" />
+                        <div className="bg-white p-4 rounded-lg shadow">
+                            <div className="flex items-center mb-2">
+                                <img src="https://via.placeholder.com/40" alt="User Avatar" className="w-10 h-10 rounded-full mr-3" />
                                 <div>
-                                    <h3 class="font-semibold">Jane Smith</h3>
-                                    <p class="text-sm text-gray-500">Posted on March 10, 2024</p>
+                                    <h3 className="font-semibold">Jane Smith</h3>
+                                    <p className="text-sm text-gray-500">Posted on March 10, 2024</p>
                                 </div>
                             </div>
-                            <p class="text-gray-700">The shipping was fast and the product arrived in perfect condition. Highly recommended!
+                            <p className="text-gray-700">The shipping was fast and the product arrived in perfect condition. Highly recommended!
                             </p>
-                            <div class="flex items-center mt-2">
-                                <button class="text-blue-500 hover:text-blue-600 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
+                            <div className="flex items-center mt-2">
+                                <button className="text-blue-500 hover:text-blue-600 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
                                     </svg>
                                     Like
                                 </button>
-                                <button class="text-gray-500 hover:text-gray-600">Reply</button>
+                                <button className="text-gray-500 hover:text-gray-600">Reply</button>
                             </div>
                         </div>
                     </div>
 
-                    <form class="mt-8 bg-white p-4 rounded-lg shadow overflow-y-auto hidden">
-                        <h3 class="text-lg font-semibold mb-2">Add a Comment</h3>
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    <form className="mt-8 bg-white p-4 rounded-lg shadow overflow-y-auto hidden">
+                        <h3 className="text-lg font-semibold mb-2">Add a Comment</h3>
+                        <div className="mb-4">
+                            <label for="name" className="block text-gray-700 font-medium mb-2">Name</label>
+                            <input type="text" id="name" name="name" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                         </div>
-                        <div class="mb-4">
-                            <label for="comment" class="block text-gray-700 font-medium mb-2">Comment</label>
-                            <textarea id="comment" name="comment" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                        <div className="mb-4">
+                            <label for="comment" className="block text-gray-700 font-medium mb-2">Comment</label>
+                            <textarea id="comment" name="comment" rows="4" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
                         </div>
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                             Post Comment
                         </button>
                     </form>
