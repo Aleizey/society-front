@@ -7,7 +7,7 @@ const AsociacionPage = () => {
 
     const params = useParams();
     const { datos, error, loading } = useFetch(`https://adrian.informaticamajada.es/api/asociaciones/${params.id}`, "GET");
-    console.log(datos)
+    
     if (error) return <p> Error </p>;
     if (loading) return <p> Cargando </p>;
 
