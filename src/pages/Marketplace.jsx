@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { SocietyContext } from "../components/ProviderSociety";
 import { useFetch } from "../components/UseFetch";
 import { Link } from "react-router";
-import { useFetch } from "../components/UseFetch";
 
 const Marketplace = () => {
 
