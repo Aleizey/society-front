@@ -30,10 +30,21 @@ const Marketplace = () => {
                 {datos.map(e => {
                     return (
                         
-                            <div className="bg-red-800 w-full h-[500px] rounded-2xl">
-                            <Link className="bg-blue-500 px-2 py-0.5 font-semibold text-sm rounded-sm text-white" to={`/producto/${e.id}`}> Go Producto </Link>
-                            </div>
-                        
+                        <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 w-full h-[500px] rounded-2xl shadow-2xl flex flex-col justify-between p-8 space-y-4 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                        <div className="flex flex-col items-center space-y-2">
+                            <h2 className="text-3xl font-extrabold text-white">{e.nombre}</h2>
+                            <p className="text-white italic"> {e.descripcion} </p>
+                        </div>
+                        <div className="mt-auto">
+                            <Link
+                                className="bg-yellow-500 px-6 py-2 font-semibold text-white rounded-full shadow-lg transition duration-300 hover:bg-yellow-600 hover:shadow-2xl"
+                                to={`/producto/${e.id}`}
+                            >
+                                Go Producto
+                            </Link>
+                        </div>
+                    </div>
+                    
                     )
                 })}
 
