@@ -6,59 +6,57 @@ import { Link } from "react-router";
 
 const Marketplace = () => {
 
-    const { datos, error, loading } = useFetch("https://adrian.informaticamajada.es/api/productos", "GET");
+    const { datos: productos, error: errorProductos, loading: loadingProductos } = useFetch("https://adrian.informaticamajada.es/api/productos", "GET");
 
-    if (error) return <p> Error </p>;
-    if (loading) return <p> Cargando </p>;
+    const { datos: imagenProduct, error: errorImagenProduct, loading: loadingImagenProduct } = useFetch("https://adrian.informaticamajada.es/api/imagenes", "GET");
 
-    const { asociaciones } = useContext(SocietyContext);
+    if (errorProductos, errorImagenProduct) return <p> Error </p>;
+    if (loadingProductos, loadingImagenProduct) return <p> Cargando... </p>;
 
     return (
         <>
-            {/* <div className=" mt-22 w-full h-[91vh] relative overflow-hidden flex justify-center items-center">
-                <span className="text-5xl text-white font-serif font-bold bottom-0 left-0 mb-2 ms-2 absolute z-2">
-                    ROPA STYLE
-                </span>
-                <img className="hover:brightness-75 transition-all absolute w-full h-full object-cover" src="https://cdn.pixabay.com/photo/2016/11/19/20/17/catwalk-1840941_1280.jpg" alt="" />
-            </div> */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-20 mt-30 lg:px-20 ">
-                {datos.map(e => {
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-12 lg:px-8">
+                {productos.map(product => {
                     return (
 
-                        <div className="bg-white w-full h-[500px] rounded-2xl shadow-lg flex flex-col justify-between p-6 space-y-4 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                            <div className="flex flex-col items-center space-y-2">
-                                <h2 className="text-2xl font-bold text-gray-800">{e.nombre}</h2>
-                                <p className="text-gray-600">Descripción breve del producto.</p>
-                            </div>
-                            <div className="flex justify-between items-center w-full mt-auto">
-                                <Link
-                                    className="bg-blue-500 px-6 py-2 font-semibold text-white rounded-md shadow-md transition duration-300 hover:bg-blue-600"
-                                    to={`/asociaciones/${e.asociacion_id}/tienda`}
-                                >
-                                    Go Tienda Asociacion
+                        <div key={product.id} className="flex flex-col overflow-hidden relative">
+                            <div className="h-full w-full relative overflow-hidden">
+
+                                <Link to={`/producto/${product.id}`} className=" hover-shop">
+                                    {/* {imagenProduct.filter(image => image.producto_id === product.id).map(image => (
+                                        <> */}
+                                    {/* cambiamos el url cuando tengamos url reales  */}
+                                    <img className="object-cover h-full w-full mb-2 relative" src="https://nude-project.com/cdn/shop/files/MILESTONES_WINDBREAKER_BLUE_front_800x.jpg?v=1738834825" alt="" />
+                                    {/* </>
+                                    ))} */}
+
                                 </Link>
-                                <Link
-                                    className="bg-blue-500 px-6 py-2 font-semibold text-white rounded-md shadow-md transition duration-300 hover:bg-blue-600"
-                                    to={`/asociacion/${e.asociacion_id}`}
-                                >
-                                    Go Asociacion
-                                </Link>
+
+                                <div className=" bg-white rounded-full absolute top-0 right-0 mt-2 mr-2 p-2 shadow-2xl hover:bg-gray-700 hover:text-white transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                    </svg>
+                                </div>
                             </div>
-                            <Link
-                                className="bg-green-500 px-6 py-2 font-semibold text-white rounded-md shadow-md transition duration-300 hover:bg-green-600 mt-4"
-                                to={`/producto/${e.id}`}
-                            >
-                                <h2 className="text-lg font-bold">Ver Producto</h2>
-                            </Link>
+                            <div className="flex flex-col ">
+                                <div className="flex flex-col text-center">
+                                    <div className="">
+                                        <p className="text-md text-ellipsis font-medium overflow-hidden text-nowrap">{product.nombre.toUpperCase()}</p>
+                                    </div>
+                                    <p className="text-xs text-ellipsis overflow-hidden text-nowrap"><span className="font-medium">{product.precio}</span> EUR </p>
+                                </div>
+
+                                {/* <div className="flex flex-row overflow-hidden space-x-1 text-white font-bold ">
+                                    <Link className="p-1 px-2 rounded-3xl rounded-r-none bg-sky-700 w-50 text-ellipsis overflow-hidden text-nowrap " to={`/asociaciones/${product.id}/tienda`}> Ir Tienda Asociacion </Link>
+                                    <Link className="p-1 px-2 rounded-3xl rounded-l-none bg-sky-700 w-50 text-ellipsis overflow-hidden text-nowrap " to={`/asociacion/${product.id}`}> Ir Asociacion </Link>
+                                </div> */}
+                            </div>
+
                         </div>
-
-
-
-
                     )
                 })}
 
-            </div>
+            </div >
         </>
     )
 }
