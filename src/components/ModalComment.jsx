@@ -1,4 +1,4 @@
-const ModalComment = () => {
+const ModalComment = ({ comment, onClose, datos }) => {
 
     return (
         <>
@@ -10,7 +10,7 @@ const ModalComment = () => {
                         <div className="font-bold cursor-pointer text-xl text-sky-700">
                             Borradores
                         </div>
-                        <button className=" right-0 p-2 text-black hover:bg-gray-300/60 rounded-full cursor-pointer
+                        <button onClick={() => onClose(null)} className=" right-0 p-2 text-black hover:bg-gray-300/60 rounded-full cursor-pointer
                             ">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-7">
                                 <path d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" />
