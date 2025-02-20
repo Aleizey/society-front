@@ -5,6 +5,7 @@ import ModalComment from "../components/ModalComment";
 import { useState } from "react";
 import PostComment from "../components/PostComment";
 import Rating from '@mui/material/Rating';
+import OverflowBody from "../components/OverflowBody";
 
 function Producto() {
 
@@ -12,12 +13,7 @@ function Producto() {
     const { datos, error, loading } = useFetch(`https://adrian.informaticamajada.es/api/productos/${params.id}`, "GET");
     const [comment, setComment] = useState(null);
     const [value, setValue] = useState(2);
-
-    if (comment) {
-        document.body.classList.add("overflow-hidden");
-    } else {
-        document.body.classList.remove("overflow-hidden");
-    }
+    OverflowBody(comment)
 
 
 

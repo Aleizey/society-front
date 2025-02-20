@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const ModalComment = ({ comment, onClose, datos }) => {
 
-    const [value, setValue] = useState(2);
+    const [value, setValue] = useState(0);
 
     return (
         <>
