@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 const CSRFToken = async () => {
     try {
-        const response = await fetch("http://localhost:8000/sanctum/csrf-cookie", {
+        const response = await fetch("https://adrian.informaticamajada.es/sanctum/csrf-cookie", {
             method: "GET",
             headers: {
                 Accept: "application/json",

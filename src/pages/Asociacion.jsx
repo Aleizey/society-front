@@ -3,6 +3,7 @@ import { useFetch } from "../components/UseFetch";
 import ImagenesAsociacion from "../components/ImagenesAsociacion";
 import { Link } from "react-router";
 import PanelGestor from "../components/CrudGestorAsociacion/PanelGestor";
+import { useState } from "react";
 
 const AsociacionPage = () => {
 
@@ -15,22 +16,23 @@ const AsociacionPage = () => {
         setSearchParams({ section: newSection });
     };
 
+
     if (error) return <p> Error </p>;
     if (loading) return <p> Cargando </p>;
 
     return (
         <>
             {/* contenedor general */}
-            <div className={"grid grid-cols-4 relative min-h-screen w-full"}>
+            <div className={"flex flex-row relative min-h-screen w-full"}>
                 {/* aside */}
-                <PanelGestor idUser={datos.user_id} />
+                <PanelGestor asociacion={datos} params={params} />
                 {/* contenedor de info */}
-                <div className="bg-gray-50 col-span-4 md:col-span-3 container mx-min lg:px-10 ">
+                <div className="bg-gray-50 lg:px-10 w-full ">
                     {/* header del grupo */}
                     <div>
                         {/* portada */}
-                        <div className="mt-5 rounded-2xl w-full h-90 flex justify-center overflow-hidden relative">
-                            <img className="w-full h-full object-cover object-top" src="https://cdn.discordapp.com/home-headers/489424959270158356/9a055ebd7d4b52498292937f2703d2c3.png?size=1280" alt="" />
+                        <div className=" rounded-b-4xl w-full h-90 flex justify-center overflow-hidden relative">
+                            <img className="w-full h-full object-cover object-top" src={datos.imagenPrincipal} alt="" />
 
                         </div>
                         {/* nav */}
@@ -38,8 +40,8 @@ const AsociacionPage = () => {
                             <div className="grid grid-cols-3 pb-5 border-b-1 border-gray-400">
 
                                 <div className="flex flex-row space-x-1.5 col-span-2">
-                                    <div className="size-30 rounded-2xl border-3  border-white overflow-hidden">
-                                        <img className="w-full h-full object-cover" src="https://cdn.discordapp.com/icons/489424959270158356/7183b55da16b36807266d0f094227397.webp?size=100" alt="" />
+                                    <div className="size-30 flex shrink-0 rounded-2xl border-3  border-white overflow-hidden">
+                                        <img className="w-full h-full object-cover" src={datos.imagenPrincipal} alt="" />
                                     </div>
                                     <div className="">
                                         <p className="flex flex-col lg:flex-row lg:items-center items-start text-4xl text-nowrap overflow-hidden text-ellipsis font-bold">
@@ -64,14 +66,14 @@ const AsociacionPage = () => {
                                             </span>
                                         </p>
                                         <span className="flex w-min font-medium rounded-4xl mt-auto my-2">
-                                            <span className="bg-blue-500 text-sm text-nowrap text-white rounded-4xl px-3 p-1">
+                                            <span className="bg-sky-300 text-sm text-nowrap text-white rounded-4xl px-3 p-1">
                                                 {datos.tipo.toUpperCase()}
                                             </span>
                                         </span>
                                     </div>
                                 </div>
                                 <div className="col-span-1 grid lg:grid-cols-2 grid-cols-1 gap-1 mt-auto">
-                                    <button className="bg-sky-700 flex flex-row items-center justify-center space-x-2 text-sm rounded-sm text-ellipsis text-nowrap overflow-hidden text-white p-2 w-full hover:bg-gray-500 transition-all cursor-pointer">
+                                    <button className="bg-sky-500 flex flex-row items-center justify-center space-x-2 text-sm rounded-sm text-ellipsis text-nowrap overflow-hidden text-white p-2 w-full hover:bg-sky-950 transition-all cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                                         </svg>
@@ -79,7 +81,7 @@ const AsociacionPage = () => {
                                             UNIRSE AL GRUPO
                                         </p>
                                     </button>
-                                    <button className="bg-gray-300 flex flex-row items-center justify-center space-x-2   rounded-sm text-ellipsis text-nowrap overflow-hidden text-black p-2 w-full hover:bg-gray-950 transition-all cursor-pointer">
+                                    <button className="bg-gray-300 flex flex-row items-center justify-center space-x-2   rounded-sm text-ellipsis text-nowrap overflow-hidden text-black p-2 w-full hover:bg-gray-950 hover:text-white transition-all cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
                                         </svg>

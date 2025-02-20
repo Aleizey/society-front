@@ -12,6 +12,7 @@ import Logout from './pages/Logout';
 import ProviderSociety from './components/ProviderSociety'
 import Marketplace from './pages/Marketplace'
 import AdminProductos from './pages/AdminProductos';
+import GestorProductos from './components/CrudGestorAsociacion/GestorProductos';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/producto/:id" element={<Producto />} />
             <Route path="/asociacion/:id" element={<AsociacionPage />} />
             <Route path="/asociaciones/:id/tienda" element={<MarketplaceAsociacion />} />
+            <Route path="/asociaciones/:id/gestionProductos" element={<GestorProductos />} />
             <Route path="/login" element={<Login />} />
             <Route path="/adminProductos" element={<AdminProductos />} />
             <Route path="/logout" element={<Logout />} />

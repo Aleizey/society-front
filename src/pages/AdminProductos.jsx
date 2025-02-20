@@ -4,6 +4,7 @@ import { useFetch } from "../components/UseFetch";
 import { Link } from "react-router";
 import RemoveProduct from "../components/CrudProduct/RemoveProduct";
 import EditProduct from "../components/CrudProduct/EditProduct";
+import OverflowBody from "../components/OverflowBody";
 
 const AdminProductos = () => {
 
@@ -12,6 +13,10 @@ const AdminProductos = () => {
     const [addProduct, setAddProduct] = useState(null);
     const [removeProduct, setRemoveProduct] = useState(null);
     const [editProduct, setEditProduct] = useState(null);
+
+    if (addProduct) { OverflowBody(addProduct) }
+    if (removeProduct) { OverflowBody(removeProduct) }
+    if (editProduct) { OverflowBody(editProduct) }
 
     if (errorProductos) return <p> Error </p>;
     if (loadingProductos) return <p> Cargando... </p>;
