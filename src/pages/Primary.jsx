@@ -5,6 +5,7 @@ import { Link } from "react-router";
 const Primary = () => {
 
     const { asociaciones } = useContext(SocietyContext);
+    // console.log(asociaciones.data.data)
     return (
         <>
 
