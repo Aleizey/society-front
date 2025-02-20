@@ -7,6 +7,7 @@ import Producto from './pages/Producto';
 import AsociacionPage from './pages/Asociacion';
 import MarketplaceAsociacion from './pages/MarketplaceAsociacion';
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 
 import ProviderSociety from './components/ProviderSociety'
 import Marketplace from './pages/Marketplace'
@@ -26,6 +27,7 @@ function App() {
             <Route path="/asociaciones/:id/tienda" element={<MarketplaceAsociacion />} />
             <Route path="/login" element={<Login />} />
             <Route path="/adminProductos" element={<AdminProductos />} />
+            <Route path="/logout" element={<Logout />} />
           </Route>
           <Route path="/*" element={<NotFound />} />
         </Routes>
