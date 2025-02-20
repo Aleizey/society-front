@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import CSRFToken from "../components/Token";
 
 const Login = () => {
@@ -25,19 +26,15 @@ const Login = () => {
         CSRFToken(formData);
 
         try {
-            const response = await fetch("http://localhost:8000/api/login", {
-                method: "POST",
-                body: formData,
+            const response = await axios.post("https://adrian.informaticamajada.es/api/login", formData, {
                 headers: {
-                    Accept: "application/json",
+                    "Accept": "application/json",
                 },
-                credentials: "include", // Importante si usas cookies para autenticación
+                withCredentials: true, // Importante si usas cookies para autenticación
+                withXSRFToken: true,
             });
 
-            if (!response.ok) throw new Error("Error al iniciar sesión");
-
-            const data = await response.json();
-            console.log("Sesión iniciada con éxito:", data);
+            console.log("Sesión iniciada con éxito:", response.data);
             alert("Sesión iniciada con éxito!");
         } catch (error) {
             console.error("Error:", error);

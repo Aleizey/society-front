@@ -1,18 +1,10 @@
-import { useFetch } from "../components/UseFetch";
-import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const CSRFToken = async () => {
     try {
-        const response = await fetch("http://localhost:8000/sanctum/csrf-cookie", {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-            },
-            credentials: "include", // Importante para enviar y recibir cookies
+        await axios.get("https://adrian.informaticamajada.es/sanctum/csrf-cookie", {
         });
-
-        if (!response.ok) throw new Error("Error al obtener el token CSRF");
-
         console.log("Token CSRF obtenido con éxito");
     } catch (error) {
         console.error("Error al obtener el token CSRF:", error);
