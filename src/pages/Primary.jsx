@@ -13,7 +13,7 @@ const Primary = () => {
                 {asociaciones.map(dataAso => (
                     <div className="flex flex-col justify-between border-1 border-black/10 overflow-hidden w-full rounded-2xl text-black shadow-2xl" key={dataAso.id} >
                         <div>
-                            <img src={dataAso.imagen ? "https://trebeki.info/wp-content/uploads/2018/02/trebeki-asociacion-cooperativa-1801.jpg" : ""} alt="" className="border-b-1 border-black/10 w-full h-40 object-cover" />
+                            <img src={dataAso.imagenPrincipal ? dataAso.imagenPrincipal : "https://trebeki.info/wp-content/uploads/2018/02/trebeki-asociacion-cooperativa-1801.jpg"} alt="" className="border-b-1 border-black/10 w-full h-40 object-cover" />
                         </div>
                         <div className="p-1">
                             <h2 className="text-2xl text-ellipsis text-nowrap overflow-hidden mb-2"> {dataAso.nombre}</h2>
