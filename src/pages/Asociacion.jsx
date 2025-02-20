@@ -23,7 +23,7 @@ const AsociacionPage = () => {
             {/* contenedor general */}
             <div className={"grid grid-cols-4 relative min-h-screen w-full"}>
                 {/* aside */}
-                <PanelGestor />
+                <PanelGestor idUser={datos.user_id} />
                 {/* contenedor de info */}
                 <div className="bg-gray-50 col-span-4 md:col-span-3 container mx-min lg:px-10 ">
                     {/* header del grupo */}

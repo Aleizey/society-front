@@ -4,18 +4,22 @@ import { Link } from "react-router";
 import ModalComment from "../components/ModalComment";
 import { useState } from "react";
 import PostComment from "../components/PostComment";
+import Rating from '@mui/material/Rating';
 
 function Producto() {
 
     const params = useParams();
     const { datos, error, loading } = useFetch(`https://adrian.informaticamajada.es/api/productos/${params.id}`, "GET");
     const [comment, setComment] = useState(null);
+    const [value, setValue] = useState(2);
 
     if (comment) {
         document.body.classList.add("overflow-hidden");
     } else {
         document.body.classList.remove("overflow-hidden");
     }
+
+
 
     if (error) return <p> Error </p>;
     if (loading) return <p> Cargando </p>;
@@ -128,42 +132,13 @@ function Producto() {
                                 </button>
                             </div>
                             {/* Div de las estrellas de reseña */}
-                            <div className="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    className="size-5 text-dark">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    className="size-5 text-dark">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    className="size-5 text-dark">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    className="size-5 text-dark">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    className="size-5 text-dark">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span className="ml-2 text-gray-600">4.5 (120 reviews)</span>
-                            </div>
+                            {/* <div className="flex items-center mb-4">
+
+                            </div> */}
+                            <Rating name="read-only" value={3} readOnly />
                             {/*  */}
                             <div>
-                                <div className="flex flex-row justify-between items-center w-full border-y-1 hover:italic transition-all cursor-pointer border-gray-300 py-4 text-lg px-1">
+                                <div className="flex flex-row justify-between items-center w-full mt-3 border-y-1 hover:italic transition-all cursor-pointer border-gray-300 py-4 text-lg px-1">
                                     <p>
                                         Envío - Cambios y Devoluciones
                                     </p>
@@ -175,7 +150,7 @@ function Producto() {
                                 </div>
                                 <div className="flex flex-row justify-between items-center w-full border-b-1 hover:italic transition-all cursor-pointer border-gray-300 py-4 text-lg px-1">
                                     <p>
-                                       Detalles
+                                        Detalles
                                     </p>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

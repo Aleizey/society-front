@@ -1,8 +1,32 @@
-const PanelGestor = () => {
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { useFetch } from '../UseFetch';
+
+const PanelGestor = ({ idUser }) => {
+
+    const { datos, error, loading } = useFetch(`https://adrian.informaticamajada.es/api/users/${idUser}`, "GET");
+    if (error) return <p>Error</p>;
+    if (loading) return <p>Loading...</p>;
     return (
         <>
-            <div className="bg-white border-r-1 border-gray-400 w-auto h-auto self-start sticky top-22 p-4 z-2 md:flex flex-col hidden">
-                <div className="text-3xl font-bold text-gray-900 mb-1 pb-3">
+            <div className="bg-white w-auto h-auto self-start sticky top-22 p-4 z-2 md:flex flex-col hidden">
+
+                <div className='flex flex-row font-bold justify-between items-center border-b pb-6 border-gray-200'>
+                    <div>
+                        <p className='text-black'>{datos.name}</p>
+                        <p className='font-medium text-gray-500'>Admin</p>
+                    </div>
+                    <Stack direction="row" spacing={2}>
+                        <Avatar
+                            alt="Remy Sharp"
+                            src="/static/images/avatar/1.jpg"
+                            sx={{ width: 50, height: 50 }}
+                        />
+                    </Stack>
+                </div>
+
+                <div className="text-3xl font-bold text-gray-900 mb-1 py-3">
                     <p>Gestion </p>
                 </div>
                 <ul className="text-lg font-medium flex flex-col pb-6">
@@ -39,7 +63,7 @@ const PanelGestor = () => {
                     </li>
                     <li></li>
                 </ul>
-            </div>
+            </div >
         </>
     )
 }
