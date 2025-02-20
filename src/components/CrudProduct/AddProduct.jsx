@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function AddProduct({ onClose }) {
+function AddProduct({ onClose, asociacionId }) {
     const [isClothing, setIsClothing] = useState(false);
     const [product, setProduct] = useState({
         nombre: "",
@@ -8,7 +8,7 @@ function AddProduct({ onClose }) {
         precio: "",
         stock: "",
         isRopa: 0,
-        asociacion_id: 1
+        asociacion_id: asociacionId ? asociacionId : ""
     });
 
     const handleChange = (e) => {
@@ -31,7 +31,10 @@ function AddProduct({ onClose }) {
         try {
             const response = await fetch("https://adrian.informaticamajada.es/api/productos", {
                 method: "POST",
-                body: formData,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(product)
             });
 
             if (!response.ok) throw new Error("Error al enviar el producto");
@@ -62,6 +65,8 @@ function AddProduct({ onClose }) {
                         { label: "Descripción", name: "descripcion", type: "textarea", rows: 3 },
                         { label: "Precio", name: "precio", type: "number", required: true },
                         { label: "Stock", name: "stock", type: "number", required: true },
+                        ...(asociacionId ? [] : [{ label: "Asociación", name: "asociacion_id", type: "number", required: true }])
+
                     ].map(({ label, name, type, ...props }) => (
                         <div className="mb-4" key={name}>
                             <label htmlFor={name} className="block text-gray-700 font-semibold mb-1">{label}</label>

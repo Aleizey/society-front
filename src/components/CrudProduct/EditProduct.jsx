@@ -32,7 +32,10 @@ function EditProduct({ productFull, onClose }) {
         try {
             const response = await fetch(`https://adrian.informaticamajada.es/api/productos/${productFull.id}`, {
                 method: "PUT",
-                body: formData,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(product)
             });
 
             if (!response.ok) throw new Error("Error al editar el producto");

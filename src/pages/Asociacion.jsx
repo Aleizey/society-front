@@ -25,7 +25,7 @@ const AsociacionPage = () => {
             {/* contenedor general */}
             <div className={"flex flex-row relative min-h-screen w-full"}>
                 {/* aside */}
-                <PanelGestor asociacion={datos} />
+                <PanelGestor asociacion={datos} params={params} />
                 {/* contenedor de info */}
                 <div className="bg-gray-50 lg:px-10 w-full ">
                     {/* header del grupo */}
