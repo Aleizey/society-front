@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Search } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
+import { useAuth } from "../hooks/auth";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -22,10 +23,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const Header = () => {
 
     const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
+    const { user } = useAuth({ middleware: 'auth' })
 
     const handleClick = () => {
 
-        console.log("User")
         if (modalProfile) {
             setModalProfile(false);
         }
@@ -78,19 +79,23 @@ const Header = () => {
                         </div>
 
                         <div>
-                            <Stack className="cursor-pointer" onClick={() => handleClick(1)} direction="row" spacing={2}>
+                            <Stack className="cursor-pointer" onClick={user ? () => handleClick() : undefined} direction="row" spacing={2}>
                                 <Avatar
-                                    alt="Alex"
+                                    alt={user?.name}
                                     src="/static/images/avatar/1.jpg"
                                     sx={{
-                                        width: 40, height: 40, '&:hover': {
-                                            backgroundColor: 'rgba(0, 0, 100)',
-                                        }
+                                        width: 40,
+                                        height: 40,
+                                        ...(user && { '&:hover': { backgroundColor: 'rgba(0, 0, 100)', } })
                                     }}
                                 />
                             </Stack>
-                            {modalProfile && (
-                                <ModalProfile />
+                            {user && (
+                                <>
+                                    {modalProfile && (
+                                        <ModalProfile user={user} />
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>

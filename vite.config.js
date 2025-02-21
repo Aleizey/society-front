@@ -1,14 +1,20 @@
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from 'path';
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-  server: {
-    '/api': 'https://adrian.informaticamajada.es',
-  }
-})
+export default ({ mode }) => {
+  return defineConfig({
+    plugins: [react()],
+    define: {
+      "process.env.NODE_ENV": `"${mode}"`,
+    },
+    resolve: {
+      alias: {
+        'components': path.resolve('src/components/'),
+        'pages': path.resolve('src/pages/'),
+        'lib': path.resolve('src/lib/'),
+        'hooks': path.resolve('src/hooks/'),
+      }
+    }
+  })
+}

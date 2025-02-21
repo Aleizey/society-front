@@ -1,19 +1,22 @@
 import { Avatar, Divider, Stack } from "@mui/material";
+import { useAuth } from '../hooks/auth'
 
-const ModalProfile = () => {
+const ModalProfile = ({ user }) => {
+
+    const { logout } = useAuth()
     return (
         <>
             <div className="fixed bg-white p-3 rounded-lg right-2.5 mt-0.5 shadow-2xl border-1 border-gray-200">
                 <div className="flex flex-row justify-start space-x-2 items-center">
                     <Stack direction="row" spacing={2}>
                         <Avatar
-                            alt="Alex"
+                            alt={user?.name}
                             src="/static/images/avatar/1.jpg"
                             sx={{ width: 38, height: 38 }}
                         />
                     </Stack>
                     <span className="flex justify-center items-center text-xl font-medium text-nowrap flex-col p-0 m-0">
-                        <p>Administrador</p>
+                        <p>{user?.name}</p>
                     </span>
                 </div>
                 <div className="py-4">
@@ -51,7 +54,7 @@ const ModalProfile = () => {
                     <div className="py-4">
                         <Divider />
                     </div>
-                    <li className="bg-sky-500 cursor-pointer p-2 rounded-3xl text-center flex justify-center items-center font-medium text-white">
+                    <li onClick={logout} className="bg-sky-500 cursor-pointer p-2 rounded-3xl text-center flex justify-center items-center font-medium text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 me-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                         </svg>
