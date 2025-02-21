@@ -27,10 +27,10 @@ function App() {
             <Route path="/asociacion/:id" element={<AsociacionPage />} />
             <Route path="/asociaciones/:id/tienda" element={<MarketplaceAsociacion />} />
             <Route path="/asociaciones/:id/gestionProductos" element={<GestorProductos />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/adminProductos" element={<AdminProductos />} />
-            <Route path="/logout" element={<Logout />} />
           </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </ProviderSociety>
