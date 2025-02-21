@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
-import { Divider, Fab, TextField } from '@mui/material';
+import { Divider, Fab } from '@mui/material';
 import * as React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -89,8 +89,8 @@ const ModalVistaGeneral = ({ datosAso, onClose }) => {
 
 
     return (
-        <div className="fixed inset-0 z-200 flex justify-center items-center bg-black/80 bg-opacity-50 select-none">
-            <div className="bg-white w-full h-full md:w-200 md:h-min rounded-lg p-5">
+        <div className="fixed inset-0 z-200 flex justify-center items-center bg-black/80 bg-opacity-50 select-none h-screen">
+            <div className="bg-white w-full h-min md:w-240 scale-80 rounded-lg p-5">
                 <div className='grid grid-cols-2 items-center pb-3'>
                     <div className='text-sm font-medium text-gray-500'>
                         VISTA GENERAL

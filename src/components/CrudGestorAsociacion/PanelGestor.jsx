@@ -6,7 +6,7 @@ import ModalVistaGeneral from './ModalVistaGeneral';
 import OverflowBody from '../OverflowBody';
 import { Link } from 'react-router';
 
-const PanelGestor = ({ asociacion, params }) => {
+const PanelGestor = ({ asociacion, params, onClose }) => {
 
     const [modalVistaGeneral, setModalVistaGeneral] = useState(false);
     OverflowBody(modalVistaGeneral)
@@ -19,8 +19,12 @@ const PanelGestor = ({ asociacion, params }) => {
             {modalVistaGeneral && (
                 <ModalVistaGeneral datosAso={asociacion} onClose={() => setModalVistaGeneral(false)} />
             )}
-            <div className="bg-white shrink-0 w-80 h-auto self-start sticky top-22 p-4 z-2 md:flex flex-col hidden">
-
+            <div className="bg-white shrink-0 w-80 md:h-auto h-screen self-start md:sticky fixed top-21 p-4 pt-2 z-2 md:flex flex-col">
+                <div className='mb-4 cursor-pointer w-min bg-gray-100 hover:bg-gray-500 transition-all hover:text-white rounded-xl p-2' onClick={onClose}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </div>
                 <div className='flex flex-row font-bold justify-between items-center border-b pb-6 border-gray-200'>
                     <div>
                         <p className='text-black'>{datos.name}</p>
@@ -28,7 +32,7 @@ const PanelGestor = ({ asociacion, params }) => {
                     </div>
                     <Stack direction="row" spacing={2}>
                         <Avatar
-                            alt="Remy Sharp"
+                            alt= {datos.name}
                             src="/static/images/avatar/1.jpg"
                             sx={{ width: 50, height: 50 }}
                         />

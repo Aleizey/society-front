@@ -31,7 +31,7 @@ function Producto() {
 
                     {/* Div de imagenes */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 relative px-4 mb-8 col-span-2">
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Product"
+                        <img src={datos.imagenPrincipal} alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
                         <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
