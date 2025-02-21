@@ -21,16 +21,18 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Header = () => {
 
-    const [modalProfile, setModalProfile] = React.useState(false);
+    const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
 
     const handleClick = () => {
 
+        console.log("User")
         if (modalProfile) {
             setModalProfile(false);
         }
         else {
             setModalProfile(true);
         }
+
     }
 
     return (
@@ -41,7 +43,7 @@ const Header = () => {
                 </div>
                 <div className="bg-white flex flex-row justify-between items-center px-3 border-b-1 border-gray-300">
                     {/* LOGO */}
-                    <div className="flex flex-row items-center space-x-5">
+                    <div className="flex flex-row items-center space-x-1">
                         <div>
                             <img src={Logo} alt="" width={130} />
                         </div>
@@ -54,29 +56,29 @@ const Header = () => {
                     {/* NAVBAR  */}
                     <Navbar />
                     {/* USER Y CARRITO */}
-                    <div className="flex flex-row py-2.5 justify-between items-center space-x-6">
+                    <div className="grid grid-cols-3 md:grid-cols-4  gap-1 text-center py-2.5 justify-between items-center md:space-x-6">
 
-                        <div className=" relative ">
+                        <div className=" relative m-0 md:block hidden">
                             <Search>
                                 <SearchIcon />
                             </Search>
                         </div>
-                        <div className="relative">
-                            <IconButton aria-label="cart">
+                        <div className="relative m-0">
+                            <IconButton onClick={() => handleClick(2)} aria-label="cart">
                                 <StyledBadge badgeContent={4} color="primary">
                                     <ShoppingCartIcon />
                                 </StyledBadge>
                             </IconButton>
                         </div>
 
-                        <div className="relative">
+                        <div className="relative m-0">
                             <Badge badgeContent={4} color="primary">
                                 <MailIcon color="action" />
                             </Badge>
                         </div>
 
                         <div>
-                            <Stack className="cursor-pointer" onClick={() => handleClick()} direction="row" spacing={2}>
+                            <Stack className="cursor-pointer" onClick={() => handleClick(1)} direction="row" spacing={2}>
                                 <Avatar
                                     alt="Alex"
                                     src="/static/images/avatar/1.jpg"

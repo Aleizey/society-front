@@ -9,7 +9,7 @@ const Primary = () => {
     // console.log(asociaciones.data.data)
     return (
         <>
-            <SubirImagen />
+            {/* <SubirImagen /> */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12 lg:px-8 ">
                 {asociaciones.map(dataAso => (
                     <div className="flex flex-col justify-between border-1 border-black/10 overflow-hidden w-full rounded-2xl text-black shadow-2xl" key={dataAso.id} >
