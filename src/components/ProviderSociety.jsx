@@ -1,23 +1,28 @@
-import { createContext, useState } from 'react';
-// import ApiLoading from './ApiLoading';
-// import ApiError from './ApiError';
-import { useFetch } from './UseFetch';
+import { useState, useEffect, createContext } from 'react';
+import CrudManager from '../hooks/CrudManager';
 
 export const SocietyContext = createContext();
 
 const ProviderSociety = ({ children }) => {
-    const { datos, error, loading } = useFetch("https://api.tvmaze.com/shows");
 
-    console.log(error)
-    console.log(loading)
-    // if (error) return <ApiError />;
-    // if (loading) return <ApiLoading />;
+    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/asociaciones' });
+
+    const [asociaciones, setAsociaciones] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        views({ setData: setAsociaciones, setLoading, setErrors: setError });
+    }, []);
+
+    if (loading) return <div>Cargando...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
-        <SocietyContext.Provider value={{ datos }}>
+        <SocietyContext.Provider value={{ asociaciones }}>
             {children}
         </SocietyContext.Provider>
     );
-}
+};
 
 export default ProviderSociety;
