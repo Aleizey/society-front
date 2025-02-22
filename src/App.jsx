@@ -9,8 +9,6 @@ import Login from './pages/auth/login';
 import NotFound from './pages/auth/404';
 import ForgotPassword from './pages/auth/forgot-password';
 import PasswordReset from './pages/auth/password-reset';
-import NotFound from './pages/NotFound';
-import Logout from './pages/Logout';
 import Carrito from './pages/Carrito';
 
 import ProviderSociety from './components/ProviderSociety'
