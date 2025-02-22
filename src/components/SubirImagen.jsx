@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const SubirImagen = () => {
     const [file, setFile] = useState(null);
@@ -26,20 +27,18 @@ const SubirImagen = () => {
         formData.append("producto_id", productoId);
 
         try {
-            const response = await fetch("http://localhost:8000/api/imagenes", {
-                method: "POST",
-                body: formData
+            const response = await axios.post("http://localhost:8000/api/imagenes", formData, {
+                headers: {
+                    "Accept": "application/json",
+                },
+                withCredentials: true, // Importante si usas cookies para autenticación
+                withXSRFToken: true,
             });
-
-            const data = await response.json();
-            if (response.ok) {
-                setMensaje(`Imagen subida con éxito: ${data.url}`);
-            } else {
-                setMensaje(`Error: ${data.error}`);
-            }
+            console.log("Imagen subida con éxito:", response.data);
+            alert("imagen subida con exito");
         } catch (error) {
-            setMensaje("Error al subir la imagen.");
-            console.error(error);
+            console.error("Error:", error);
+            alert("Hubo un problema al subir la imagen.");
         }
     };
 

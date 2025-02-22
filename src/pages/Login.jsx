@@ -25,10 +25,10 @@ const Login = () => {
             formData.append(key, value);
         });
 
-        CSRFToken(formData);
+        CSRFToken();
 
         try {
-            const response = await axios.post("https://adrian.informaticamajada.es/api/login", formData, {
+            const response = await axios.post("http://localhost:8000/api/login", formData, {
                 headers: {
                     "Accept": "application/json",
                 },
