@@ -11,8 +11,8 @@ const AsociacionPage = () => {
     const [handlePanel, setHandlePanel] = useState(false);
     const section = searchParams.get("section") || "general";
 
-    const { views } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}` });
-    const { views: miembros } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}/users` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}` });
+    const { views: miembros } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}/users` });
 
     const [asociaciones, setAsociaciones] = useState([]);
     const [miembro, setMiembro] = useState([]);

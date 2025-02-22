@@ -29,7 +29,7 @@ function AddProduct({ onClose, asociacionId }) {
         });
 
         try {
-            const response = await fetch("http://localhost:8000/api/productos", {
+            const response = await fetch("https://adrian.informaticamajada.es/api/productos", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

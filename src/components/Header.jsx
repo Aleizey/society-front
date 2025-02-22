@@ -65,7 +65,7 @@ const Header = () => {
                             </Search>
                         </div>
                         <div className="relative m-0">
-                            <IconButton onClick={() => handleClick(2)} aria-label="cart">
+                            <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={4} color="primary">
                                     <ShoppingCartIcon />
                                 </StyledBadge>
