@@ -1,6 +1,5 @@
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { useFetch } from '../UseFetch';
 import { useEffect, useState } from 'react';
 import ModalVistaGeneral from './ModalVistaGeneral';
 import OverflowBody from '../OverflowBody';

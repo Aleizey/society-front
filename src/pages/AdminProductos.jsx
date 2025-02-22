@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import AddProduct from "../components/CrudProduct/AddProduct";
-import { useFetch } from "../components/UseFetch";
 import { Link } from "react-router";
 import RemoveProduct from "../components/CrudProduct/RemoveProduct";
 import EditProduct from "../components/CrudProduct/EditProduct";

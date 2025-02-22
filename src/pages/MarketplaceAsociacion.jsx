@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "../components/UseFetch";
 import { Link } from "react-router";
 import { useParams } from "react-router";
 import CrudManager from "../hooks/CrudManager";

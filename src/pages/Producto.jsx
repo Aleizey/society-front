@@ -1,4 +1,3 @@
-import { useFetch } from "../components/UseFetch";
 import { useParams } from "react-router";
 import { Link } from "react-router";
 import ModalComment from "../components/ModalComment";

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useFetch } from "./UseFetch";
 import CrudManager from "../hooks/CrudManager";
 
 const PostComment = ({ product }) => {

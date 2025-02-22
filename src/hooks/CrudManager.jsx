@@ -4,6 +4,7 @@ export default function CrudManager({ url }) {
 
     const credential = {
         'Content-Type': 'application/json',
+
     }
 
     const views = ({ setData, setLoading, setErrors }) => {
@@ -18,10 +19,7 @@ export default function CrudManager({ url }) {
             .finally(() => { setLoading(false); });
     };
 
-    const csrf = () => axios.get('/sanctum/csrf-cookie')
-
     const creates = async ({ setErrors, setStatus, ...props }) => {
-        await csrf()
         setErrors([]);
         setStatus(null);
         axios
@@ -35,12 +33,11 @@ export default function CrudManager({ url }) {
 
     const updates = async ({ setErrors, setStatus, ...props }) => {
         console.log("comenzando...")
-        console.log("datos para actualizar:", props)
-        await csrf()
+        console.log("datos para actualizar:", props.product)
         setErrors([]);
         setStatus(null);
         axios
-            .put(url, props, credential)
+            .put(url, props.product, credential)
             .then(res => res.data)
             .catch(error => {
                 setErrors(
@@ -49,7 +46,6 @@ export default function CrudManager({ url }) {
     };
 
     const deletes = async ({ setErrors, setStatus, ElementId }) => {
-        await csrf()
         setErrors([]);
         setStatus(null);
         axios

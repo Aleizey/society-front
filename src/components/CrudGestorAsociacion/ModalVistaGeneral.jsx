@@ -69,7 +69,6 @@ const ModalVistaGeneral = ({ datosAso, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const updatedFields = {};
 
         Object.keys(product).forEach((key) => {
@@ -80,6 +79,7 @@ const ModalVistaGeneral = ({ datosAso, onClose }) => {
 
         console.log("Datos antes de enviar:", updatedFields);
         updates({ product: updatedFields, setErrors, setStatus });
+        onClose()
     };
 
     return (
