@@ -1,33 +1,22 @@
 import { useState, useEffect, createContext } from 'react';
-import axios from 'axios';
+import CrudManager from '../hooks/CrudManager';
 
 export const SocietyContext = createContext();
 
 const ProviderSociety = ({ children }) => {
+
+    const { views } = CrudManager({ url: 'http://localhost:8000/api/asociaciones' });
+
     const [asociaciones, setAsociaciones] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchAsociaciones = async () => {
-            try {
-                const response = await axios.get("https://adrian.informaticamajada.es/api/asociaciones",{},{
-                    withCredentials: true,
-                withXSRFToken: true,
-                });
-                setAsociaciones(response.data.data);
-            } catch (err) {
-                setError(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchAsociaciones();
+        views({ setData: setAsociaciones, setLoading, setErrors: setError });
     }, []);
 
-    if (error) return <div>Error al cargar los datos</div>;
     if (loading) return <div>Cargando...</div>;
+    if (error) return <div>Error: {error}</div>;
 
     return (
         <SocietyContext.Provider value={{ asociaciones }}>
