@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
 .active {
-    border-bottom: solid 3px rgb(0, 99, 152);
+    border-bottom: solid 4px rgb(0, 133, 205);
+}
+
+.active>svg>path {
+    fill: rgb(0, 133, 205);
+    stroke: rgb(0, 133, 205);
 }
 
 .active-aso {
