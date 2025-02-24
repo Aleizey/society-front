@@ -20,7 +20,6 @@ const Login = () => {
 
   return (
     <form onSubmit={submitForm}>
-      {/* Email Address */}
       <div>
         <label htmlFor="email">Email</label>
         <input
@@ -32,8 +31,10 @@ const Login = () => {
           required
           autoFocus
         />
+        {errors.email && (
+          <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+        )}
       </div>
-      {/* Password */}
       <div className="mt-4">
         <label htmlFor="password">Password</label>
         <input
@@ -45,8 +46,11 @@ const Login = () => {
           required
           autoComplete="current-password"
         />
+        {errors.password && (
+          <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+        )}
       </div>
-      {/* Remember Me */}
+
       <div className="block mt-4">
         <label htmlFor="remember_me" className="inline-flex items-center">
           <input
@@ -59,12 +63,26 @@ const Login = () => {
           <span className="ml-2 text-sm text-gray-600">Remember me</span>
         </label>
       </div>
-      {/* Submit */}
+
+      {status && (
+        <div className="text-green-500 text-sm mt-2">
+          {status}
+        </div>
+      )}
+
       <div className="flex items-center justify-end mt-4">
         <button className="ml-3">
           Login
         </button>
       </div>
+
+      {errors.length > 0 && (
+        <div className="text-red-500 text-sm mt-2">
+          {errors.map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </div>
+      )}
     </form>
   )
 }

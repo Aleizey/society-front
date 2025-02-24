@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { SocietyContext } from "../components/ProviderSociety";
 import SubirImagen from "../components/SubirImagen";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Primary = () => {
 

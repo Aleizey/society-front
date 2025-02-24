@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import { useEffect, useState } from 'react';
 import ModalVistaGeneral from './ModalVistaGeneral';
 import OverflowBody from '../OverflowBody';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import CrudManager from '../../hooks/CrudManager';
 
 const PanelGestor = ({ asociacion, params, onClose }) => {

@@ -1,5 +1,5 @@
-import { useParams, useSearchParams } from "react-router";
-import { Link } from "react-router";
+import { useParams, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PanelGestor from "../components/CrudGestorAsociacion/PanelGestor";
 import { useEffect, useState } from "react";
 import CrudManager from "../hooks/CrudManager";

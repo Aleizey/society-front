@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import Logo from "../resource/images/logo.png";
 import Navbar from "./Navbar";
 import { Avatar, Badge, Divider, IconButton, Stack } from "@mui/material";

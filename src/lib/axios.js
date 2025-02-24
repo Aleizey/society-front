@@ -6,8 +6,7 @@ const axios = Axios.create({
     'X-Requested-With': 'XMLHttpRequest',
     "Accept": "application/json",
   },
-  withCredentials: true,
-  withXSRFToken: true
+  withCredentials: true
 })
 
 export default axios

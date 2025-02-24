@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { Link, useParams } from "react-router-dom";
 import OverflowBody from "../OverflowBody";
 import { useEffect, useState } from "react";
 import AddProduct from "../CrudProduct/AddProduct";
