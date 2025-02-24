@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Search } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
+import { useAuth } from "../hooks/auth";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -21,7 +22,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Header = () => {
 
-    const [modalProfile, setModalProfile] = React.useState(false);
+    const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
+    const { user } = useAuth({ middleware: 'auth' })
 
     const handleClick = () => {
 
@@ -31,6 +33,7 @@ const Header = () => {
         else {
             setModalProfile(true);
         }
+
     }
 
     return (
@@ -41,27 +44,27 @@ const Header = () => {
                 </div>
                 <div className="bg-white flex flex-row justify-between items-center px-3 border-b-1 border-gray-300">
                     {/* LOGO */}
-                    <div className="flex flex-row items-center space-x-5">
+                    <div className="flex flex-row items-center space-x-1">
                         <div>
                             <img src={Logo} alt="" width={130} />
                         </div>
                         <div className="flex md:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-8">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" className="size-8">
+                                <path  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </div>
                     </div>
                     {/* NAVBAR  */}
                     <Navbar />
                     {/* USER Y CARRITO */}
-                    <div className="flex flex-row py-2.5 justify-between items-center space-x-6">
+                    <div className="grid grid-cols-3 md:grid-cols-4  gap-1 text-center py-2.5 justify-between items-center md:space-x-6">
 
-                        <div className=" relative ">
+                        <div className=" relative m-0 md:block hidden">
                             <Search>
                                 <SearchIcon />
                             </Search>
                         </div>
-                        <div className="relative">
+                        <div className="relative m-0">
                             <IconButton aria-label="cart">
                                 <StyledBadge badgeContent={4} color="primary">
                                     <ShoppingCartIcon />
@@ -69,26 +72,30 @@ const Header = () => {
                             </IconButton>
                         </div>
 
-                        <div className="relative">
+                        <div className="relative m-0">
                             <Badge badgeContent={4} color="primary">
                                 <MailIcon color="action" />
                             </Badge>
                         </div>
 
                         <div>
-                            <Stack className="cursor-pointer" onClick={() => handleClick()} direction="row" spacing={2}>
+                            <Stack className="cursor-pointer" onClick={user ? () => handleClick() : undefined} direction="row" spacing={2}>
                                 <Avatar
-                                    alt="Alex"
+                                    alt={user?.name}
                                     src="/static/images/avatar/1.jpg"
                                     sx={{
-                                        width: 40, height: 40, '&:hover': {
-                                            backgroundColor: 'rgba(0, 0, 100)',
-                                        }
+                                        width: 40,
+                                        height: 40,
+                                        ...(user && { '&:hover': { backgroundColor: 'rgba(0, 0, 100)', } })
                                     }}
                                 />
                             </Stack>
-                            {modalProfile && (
-                                <ModalProfile />
+                            {user && (
+                                <>
+                                    {modalProfile && (
+                                        <ModalProfile user={user} />
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>

@@ -1,13 +1,14 @@
 import { Route, Routes } from 'react-router';
 import './App.css';
-import NotFound from './pages/NotFound';
 import Primary from './pages/Primary';
 import Layout from './components/Layout';
 import Producto from './pages/Producto';
 import AsociacionPage from './pages/Asociacion';
 import MarketplaceAsociacion from './pages/MarketplaceAsociacion';
-import Login from './pages/Login';
-import Logout from './pages/Logout';
+import Login from './pages/auth/login';
+import NotFound from './pages/auth/404';
+import ForgotPassword from './pages/auth/forgot-password';
+import PasswordReset from './pages/auth/password-reset';
 import Carrito from './pages/Carrito';
 import PayView from './pages/PayView';
 
@@ -15,6 +16,7 @@ import ProviderSociety from './components/ProviderSociety'
 import Marketplace from './pages/Marketplace'
 import AdminProductos from './pages/AdminProductos';
 import GestorProductos from './components/CrudGestorAsociacion/GestorProductos';
+import Register from './pages/auth/register';
 
 function App() {
 
@@ -34,7 +36,9 @@ function App() {
             <Route path="/carrito/pay" element={<PayView />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/password-reset/:token" element={<PasswordReset />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </ProviderSociety>

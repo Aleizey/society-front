@@ -1,7 +1,7 @@
 import Rating from '@mui/material/Rating';
 import { useState } from 'react';
 
-const ModalComment = ({ comment, onClose, datos }) => {
+const ModalComment = ({ comment, onClose, productos }) => {
 
     const [value, setValue] = useState(0);
 

@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { Divider, Fab } from '@mui/material';
 import * as React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import CrudManager from '../../hooks/CrudManager';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -33,6 +35,8 @@ const CustomButton = styled(Button)({
 
 const ModalVistaGeneral = ({ datosAso, onClose }) => {
 
+    const { updates } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${datosAso.id}` });
+
     const [product, setProduct] = useState({
         nombre: datosAso.nombre || "",
         descripcion: datosAso.descripcion || "",
@@ -40,8 +44,11 @@ const ModalVistaGeneral = ({ datosAso, onClose }) => {
         direccion: datosAso.direccion || "",
         tipo: datosAso.tipo || "",
         imagenPrincipal: datosAso.imagenPrincipal || "",
-        logo: "",
+        // logo: "",
     });
+
+    const [errors, setErrors] = useState([])
+    const [status, setStatus] = useState(null)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -62,35 +69,22 @@ const ModalVistaGeneral = ({ datosAso, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const updatedFields = {};
 
-        console.log("Datos antes de enviar:", product);
+        Object.keys(product).forEach((key) => {
+            if (product[key] !== datosAso[key]) {
+                updatedFields[key] = product[key];
+            }
+        });
 
-        try {
-            const response = await fetch(`https://adrian.informaticamajada.es/api/asociaciones/${datosAso.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(product)
-            });
-
-            if (!response.ok) throw new Error("Error al editar la asociación");
-
-            const data = await response.json();
-            console.log("Respuesta del servidor:", data);
-
-            alert("Asociación editada con éxito!");
-            onClose();
-        } catch (error) {
-            console.error("Error:", error);
-            alert("Hubo un problema al editar la asociación.");
-        }
+        console.log("Datos antes de enviar:", updatedFields);
+        updates({ product: updatedFields, setErrors, setStatus });
+        onClose()
     };
-
 
     return (
         <div className="fixed inset-0 z-200 flex justify-center items-center bg-black/80 bg-opacity-50 select-none h-screen">
-            <div className="bg-white w-full h-min md:w-240 scale-80 rounded-lg p-5">
+            <div className="bg-white w-full h-min md:w-240 scale-y-85 md:scale-80 md:rounded-lg p-5">
                 <div className='grid grid-cols-2 items-center pb-3'>
                     <div className='text-sm font-medium text-gray-500'>
                         VISTA GENERAL
