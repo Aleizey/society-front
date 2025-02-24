@@ -7,9 +7,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
   let navigate = useNavigate();
   let params = useParams();
 
-  const setToken = (token) => localStorage.setItem("authToken", token);
-  const getToken = () => localStorage.getItem("authToken");
-  const removeToken = () => localStorage.removeItem("authToken");
+  const setToken = (token) => localStorage.setItem("auth_token", token);
+  const getToken = () => localStorage.getItem("auth_token");
+  const removeToken = () => localStorage.removeItem("auth_token");
   axios.defaults.headers.common['Authorization'] = `Bearer ${getToken()}`;
 
   const { data: user, error, mutate } = useSWR('/api/user', () =>

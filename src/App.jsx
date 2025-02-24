@@ -13,9 +13,10 @@ import PasswordReset from './pages/auth/password-reset';
 
 import ProviderSociety from './components/ProviderSociety'
 import Marketplace from './pages/Marketplace'
-import AdminProductos from './pages/AdminProductos';
+import AdminProductos from './pages/admin/AdminProductos';
 import GestorProductos from './components/CrudGestorAsociacion/GestorProductos';
 import Register from './pages/auth/register';
+import CreateAsociacion from './pages/CreateAsociacion';
 
 function App() {
 
@@ -28,10 +29,12 @@ function App() {
             <Route path="/shop" element={<Marketplace />} />
             <Route path="/producto/:id" element={<Producto />} />
             <Route path="/asociacion/:id" element={<AsociacionPage />} />
-            <Route path="/asociaciones/:id/tienda" element={<MarketplaceAsociacion />} />
-            <Route path="/asociaciones/:id/gestionProductos" element={<GestorProductos />} />
-            <Route path="/adminProductos" element={<AdminProductos />} />
+            <Route path="/asociacion/:id/tienda" element={<MarketplaceAsociacion />} />
+            <Route path="/asociacion/:id/gestionProductos" element={<GestorProductos />} />
+            <Route path="/asociaciones/create" element={<CreateAsociacion />} />
             {/* <Route path="/carrito" element={<Carrito />} /> */}
+            {/* only admin */}
+            <Route path="/adminProductos" element={<AdminProductos />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

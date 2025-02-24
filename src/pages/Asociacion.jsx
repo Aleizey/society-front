@@ -11,8 +11,8 @@ const AsociacionPage = () => {
     const [handlePanel, setHandlePanel] = useState(false);
     const section = searchParams.get("section") || "general";
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}` });
-    const { views: miembros } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}/users` });
+    const { views } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}` });
+    const { views: miembros } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}/users` });
 
     const [asociaciones, setAsociaciones] = useState([]);
     const [miembro, setMiembro] = useState([]);
@@ -136,7 +136,7 @@ const AsociacionPage = () => {
                                         className={`py-2.5 border-b-3 hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer ${section === "general" ? "active-aso" : "border-b-transparent"}`}>
                                         General
                                     </li>
-                                    <Link to={`/asociaciones/${params.id}/tienda`} className="py-2.5 border-b-3 border-b-transparent hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer">Tienda</Link>
+                                    <Link to={`/asociacion/${params.id}/tienda`} className="py-2.5 border-b-3 border-b-transparent hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer">Tienda</Link>
                                     <li onClick={() => handleSectionChange("info")}
                                         className={`py-2.5 border-b-3 hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer ${section === "info" ? "active-aso" : "border-b-transparent"}`} >
                                         Información

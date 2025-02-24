@@ -11,7 +11,7 @@ const PanelGestor = ({ asociacion, params, onClose }) => {
     const [modalVistaGeneral, setModalVistaGeneral] = useState(false);
     OverflowBody(modalVistaGeneral)
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/users/${asociacion.user_id}` });
+    const { views } = CrudManager({ url: `http://localhost:8000/api/users/${asociacion.user_id}` });
 
     const [gestor, setGestor] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -63,7 +63,7 @@ const PanelGestor = ({ asociacion, params, onClose }) => {
                             <path  d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"  />
                         </svg>
                     </li>
-                    <Link to={`/asociaciones/${params.id}/gestionProductos`} className="transition-all  cursor-pointer hover:bg-sky-100 py-4 px-2
+                    <Link to={`/asociacion/${params.id}/gestionProductos`} className="transition-all  cursor-pointer hover:bg-sky-100 py-4 px-2
                     flex flex-row items-center space-x-5">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                             <path  d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z"  />

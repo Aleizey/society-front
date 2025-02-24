@@ -2,10 +2,9 @@ import axios from 'lib/axios'
 
 export default function CrudManager({ url }) {
 
-    const credential = {
+    const headers = {
         'Content-Type': 'application/json',
-
-    }
+    };
 
     const views = ({ setData, setLoading, setErrors }) => {
         setLoading(true);
@@ -23,11 +22,16 @@ export default function CrudManager({ url }) {
         setErrors([]);
         setStatus(null);
         axios
-            .post(url, props, credential)
-            .then(res => res.data)
-            .catch(error => {
-                setErrors(
-                    Object.values(error.response.data.errors).flat());
+            .post(url, props.data, headers)
+            .then((res) => {
+                setStatus("success");
+                return res.data;
+            })
+            .catch((error) => {
+                if (error.response && error.response.data.errors) {
+                    setErrors(Object.values(error.response.data.errors).flat());
+                }
+                setStatus("error");
             });
     };
 
@@ -37,7 +41,7 @@ export default function CrudManager({ url }) {
         setErrors([]);
         setStatus(null);
         axios
-            .put(url, props.product, credential)
+            .put(url, props.product,)
             .then(res => res.data)
             .catch(error => {
                 setErrors(
@@ -49,7 +53,7 @@ export default function CrudManager({ url }) {
         setErrors([]);
         setStatus(null);
         axios
-            .delete(`${url}/${ElementId}`, credential)
+            .delete(`${url}/${ElementId}`,)
             .then(res => res.data)
             .catch(error => {
                 setErrors(

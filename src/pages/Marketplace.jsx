@@ -7,8 +7,8 @@ import Loading from "../components/Loading";
 
 const Marketplace = () => {
 
-    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
-    // const { views: viewImagenProduct } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
+    const { views } = CrudManager({ url: 'http://localhost:8000/api/productos' });
+    // const { views: viewImagenProduct } = CrudManager({ url: 'http://localhost:8000/api/productos' });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -49,7 +49,7 @@ const Marketplace = () => {
                             </div>
 
                             {/* <div className="flex flex-row overflow-hidden space-x-1 text-white font-bold ">
-                                    <Link className="p-1 px-2 rounded-3xl rounded-r-none bg-sky-700 w-50 text-ellipsis overflow-hidden text-nowrap " to={`/asociaciones/${product.id}/tienda`}> Ir Tienda Asociacion </Link>
+                                    <Link className="p-1 px-2 rounded-3xl rounded-r-none bg-sky-700 w-50 text-ellipsis overflow-hidden text-nowrap " to={`/asociacion/${product.id}/tienda`}> Ir Tienda Asociacion </Link>
                                     <Link className="p-1 px-2 rounded-3xl rounded-l-none bg-sky-700 w-50 text-ellipsis overflow-hidden text-nowrap " to={`/asociacion/${product.id}`}> Ir Asociacion </Link>
                                 </div> */}
                         </div>

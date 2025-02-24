@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import AddProduct from "../components/CrudProduct/AddProduct";
+import AddProduct from "../../components/CrudProduct/AddProduct";
 import { Link } from "react-router-dom";
-import RemoveProduct from "../components/CrudProduct/RemoveProduct";
-import EditProduct from "../components/CrudProduct/EditProduct";
-import OverflowBody from "../components/OverflowBody";
-import CrudManager from "../hooks/CrudManager";
-import Loading from '../components/Loading';
+import RemoveProduct from "../../components/CrudProduct/RemoveProduct";
+import EditProduct from "../../components/CrudProduct/EditProduct";
+import OverflowBody from "../../components/OverflowBody";
+import CrudManager from "../../hooks/CrudManager";
+import Loading from '../../components/Loading';
 
 const AdminProductos = () => {
 
-    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
-    // const { views: viewImagenProduct } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
+    const { views } = CrudManager({ url: 'http://localhost:8000/api/productos' });
+    // const { views: viewImagenProduct } = CrudManager({ url: 'http://localhost:8000/api/productos' });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);

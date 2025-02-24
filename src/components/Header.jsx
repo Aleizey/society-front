@@ -9,7 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Search } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
-import { useAuth } from "../hooks/auth";
+// import { useAuth } from "../hooks/auth";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -23,7 +23,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const Header = () => {
 
     const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
-    const { user } = useAuth({ middleware: 'auth' })
+    // const { user } = useAuth({ middleware: 'auth' })
+    const user = "pablo";
 
     const handleClick = () => {
 
@@ -49,8 +50,8 @@ const Header = () => {
                             <img src={Logo} alt="" width={130} />
                         </div>
                         <div className="flex md:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" className="size-8">
-                                <path  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-8">
+                                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </div>
                     </div>
