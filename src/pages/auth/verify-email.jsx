@@ -1,6 +1,6 @@
 import { useAuth } from 'hooks/auth'
 import { useState } from 'react'
-import {Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 const VerifyEmail = () => {
   const { logout, resendEmailVerification } = useAuth({

@@ -1,5 +1,5 @@
-import { useParams, useSearchParams } from "react-router";
-import { Link } from "react-router";
+import { useParams, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PanelGestor from "../components/CrudGestorAsociacion/PanelGestor";
 import { useEffect, useState } from "react";
 import CrudManager from "../hooks/CrudManager";
@@ -11,8 +11,8 @@ const AsociacionPage = () => {
     const [handlePanel, setHandlePanel] = useState(false);
     const section = searchParams.get("section") || "general";
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}` });
-    const { views: miembros } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}/users` });
+    const { views } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}` });
+    const { views: miembros } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}/users` });
 
     const [asociaciones, setAsociaciones] = useState([]);
     const [miembro, setMiembro] = useState([]);
@@ -101,7 +101,7 @@ const AsociacionPage = () => {
                                         </p>
                                         <span className="flex flex-col md:flex-row items-start md:items-center space-x-3 w-min font-medium rounded-4xl mt-auto my-2">
                                             <span className="bg-sky-300 text-sm text-nowrap text-white rounded-4xl px-3 my-2 p-1">
-                                                {asociaciones.tipo ? asociaciones.nombre.toUpperCase() : ""}
+                                                {asociaciones?.tipo}
                                             </span>
                                             <span className="text-sm font-medium text-nowrap">
                                                 <strong className="text-sm ">{miembro.length}</strong> miembros
@@ -136,7 +136,7 @@ const AsociacionPage = () => {
                                         className={`py-2.5 border-b-3 hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer ${section === "general" ? "active-aso" : "border-b-transparent"}`}>
                                         General
                                     </li>
-                                    <Link to={`/asociaciones/${params.id}/tienda`} className="py-2.5 border-b-3 border-b-transparent hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer">Tienda</Link>
+                                    <Link to={`/asociacion/${params.id}/tienda`} className="py-2.5 border-b-3 border-b-transparent hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer">Tienda</Link>
                                     <li onClick={() => handleSectionChange("info")}
                                         className={`py-2.5 border-b-3 hover:text-gray-800 hover:border-b-3 hover:border-gray-800 cursor-pointer ${section === "info" ? "active-aso" : "border-b-transparent"}`} >
                                         Información
