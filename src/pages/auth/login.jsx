@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const BASE_URL = "https://adrian.informaticamajada.es";
+  const navigate = useNavigate();
 
   // 🔹 Función para guardar y recuperar el token desde localStorage
   const saveToken = (token) => localStorage.setItem("authToken", token);
@@ -17,8 +19,18 @@ const Login = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || `Error ${response.status}: ${response.statusText}`);
+        const errorText = await response.text();
+        let errorMessage = `Error ${response.status}: ${response.statusText}`;
+
+        // Intentar parsear el error como JSON
+        try {
+          const errorData = JSON.parse(errorText);
+          errorMessage = errorData.message || errorMessage;
+        } catch (e) {
+          // Si no es JSON, usar el texto plano
+        }
+
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
@@ -30,7 +42,7 @@ const Login = () => {
       return data;
     } catch (error) {
       console.error("❌ Error en login:", error.message);
-      throw error;
+      throw new Error("Error de conexión. Por favor, intenta de nuevo más tarde.");
     }
   };
 
@@ -38,19 +50,33 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
   const [status, setStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitForm = async (event) => {
     event.preventDefault();
     setErrors([]); // Limpiar errores anteriores
     setStatus(null); // Limpiar estado anterior
 
+    // Validación básica
+    if (!email || !password) {
+      setErrors(["Por favor, completa todos los campos."]);
+      return;
+    }
+
+    setIsLoading(true); // Activar el indicador de carga
+
     try {
       const data = await login(email, password);
       setStatus("Login exitoso! Redirigiendo...");
-      // Aquí podrías redirigir al usuario a otra página, por ejemplo:
-      // window.location.href = '/dashboard';
+
+      // Redirigir al dashboard después de 2 segundos
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 2000);
     } catch (error) {
       setErrors([error.message]); // Mostrar el mensaje de error
+    } finally {
+      setIsLoading(false); // Desactivar el indicador de carga
     }
   };
 
@@ -106,8 +132,8 @@ const Login = () => {
       )}
 
       <div className="flex items-center justify-end mt-4">
-        <button type="submit" className="ml-3">
-          Login
+        <button type="submit" className="ml-3" disabled={isLoading}>
+          {isLoading ? "Cargando..." : "Login"}
         </button>
       </div>
 
