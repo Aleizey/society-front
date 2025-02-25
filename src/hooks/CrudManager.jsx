@@ -19,9 +19,10 @@ export default function CrudManager({ url }) {
     };
 
     const creates = ({ setErrors, setStatus, ...props }) => {
+        console.log("comenzando...")
+        console.log("datos para actualizar:", props.product)
         setErrors([]);
         setStatus(null);
-
         return axios
             .post(url, props.data, headers)
             .then((res) => {

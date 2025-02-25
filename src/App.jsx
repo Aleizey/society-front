@@ -18,7 +18,10 @@ import GestorProductos from './components/CrudGestorAsociacion/GestorProductos';
 import Register from './pages/auth/register';
 import CreateAsociacion from './pages/CreateAsociacion';
 import AdminAsociacion from './pages/admin/AdminAsociacion';
-import AdminUsers from './pages/admin/AdminUsers';
+import AdminUsers from './pages/admin/user/AdminUsers';
+import CreateUsers from './pages/admin/user/CreateUsers';
+import ShowUsers from './pages/admin/user/ShowUsers';
+import UpdateUsers from './pages/admin/user/UpdateUsers';
 
 function App() {
 
@@ -37,7 +40,12 @@ function App() {
             {/* <Route path="/carrito" element={<Carrito />} /> */}
             {/* only admin */}
             <Route path="/admin/productos" element={<AdminProductos />} />
+            {/* users */}
             <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/users/crear" element={<CreateUsers />} />
+            <Route path="/admin/users/:id/show" element={<ShowUsers />} />
+            <Route path="/admin/users/:id/actualizar" element={<UpdateUsers />} />
+            {/* asociacion */}
             <Route path="/admin/asociacion" element={<AdminAsociacion />} />
           </Route>
           <Route path="/login" element={<Login />} />

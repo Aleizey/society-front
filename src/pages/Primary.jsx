@@ -14,7 +14,7 @@ const Primary = () => {
                     {/* <SubirImagen /> */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12 lg:px-8 ">
                         {asociaciones.map(dataAso => (
-                            <div className="flex flex-col justify-between border-1 border-black/10 overflow-hidden w-full rounded-2xl text-black shadow-2xl" key={dataAso.id} >
+                            <Link to={`/asociacion/${dataAso.id}`} className="flex flex-col justify-between border-1 border-black/10 overflow-hidden w-full rounded-2xl text-black shadow-2xl" key={dataAso.id} >
                                 <div>
                                     <img src={dataAso.imagenPrincipal ? dataAso.imagenPrincipal : "https://trebeki.info/wp-content/uploads/2018/02/trebeki-asociacion-cooperativa-1801.jpg"} alt="" className="border-b-1 border-black/10 w-full h-40 object-cover" />
                                 </div>
@@ -29,10 +29,9 @@ const Primary = () => {
 
                                 </div>
                                 <div className="flex justify-between py-1.5 px-1.5">
-                                    <Link to={`/asociacion/${dataAso.id}`} className="bg-sky-700 w-35 text-center rounded-2xl text-ellipsis text-nowrap overflow-hidden rounded-e-none border-e-2 font-bold text-white p-2 hover:bg-sky-950 transition-all cursor-pointer">VIEW</Link>
-                                    <button className="bg-sky-700 rounded-2xl text-ellipsis text-nowrap overflow-hidden rounded-s-none border-s-2 font-bold text-white p-2 w-full hover:bg-sky-950 transition-all cursor-pointer">JOIN ASOCIACION</button>
+                                    <button className="bg-sky-200 text-sky-500 rounded-full text-ellipsis text-nowrap overflow-hidden font-bold p-2 w-full hover:bg-sky-400 hover:text-white transition-all cursor-pointer">JOIN ASOCIACION</button>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </>

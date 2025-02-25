@@ -33,7 +33,7 @@ const AdminAsociacion = () => {
             {modalAprobar &&
                 (<ModalAprobar idAsociacion={modalAprobar} onClose={() => setModalAprobar(null)} />
                 )}
-            <div className=" container mx-auto mt-10 px-4">
+            <div className=" container overflow-x-scroll mx-auto mt-10 px-4">
                 <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
                     Administrar Asociaciones
                 </h1>
@@ -91,18 +91,25 @@ const AdminAsociacion = () => {
                                             <img
                                                 src={aso.imagenPrincipal || "https://trebeki.info/wp-content/uploads/2018/02/trebeki-asociacion-cooperativa-1801.jpg"}
                                                 alt="Asociación"
-                                                className="w-15 h-15 object-cover rounded-xl border-2 border-gray-300 shadow-sm"
+                                                className="w-20 h-15 shrink-0 object-cover rounded-xl border-2 border-gray-300 shadow-sm"
                                             />
                                         </td>
                                         <td className="px-6 py-4 flex flex-col text-center justify-center gap-2">
                                             <Link
                                                 to={`/asociacion/${aso.id}`}
-                                                className="bg-sky-200 text-sky-600 px-10 py-1.5 rounded-md font-semibold hover:bg-blue-400 transition">
-                                                Ver
+                                                className="bg-sky-200 text-sky-600 flex flex-row justify-center py-1.5 rounded-md font-semibold hover:bg-blue-400 transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 me-1">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                                <span>Ver</span>
                                             </Link>
                                             <button
-                                                className="bg-green-200 text-green-800 px-10 py-1.5 rounded-md font-semibold hover:bg-green-400 transition" onClick={() => setModalAprobar(aso.id)}>
-                                                Aprobar
+                                                className="bg-green-200 text-green-800 flex flex-row justify-center px-2 py-1.5 rounded-md font-semibold hover:bg-green-400 transition" onClick={() => setModalAprobar(aso.id)}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 me-1">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                                </svg>
+                                                <span>Aprobar</span>
                                             </button>
                                         </td>
                                     </tr>
