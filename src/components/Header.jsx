@@ -10,7 +10,6 @@ import { Search } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
 import { useAuth } from "../hooks/auth";
-import { SocietyContext } from "./ProviderSociety";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -24,7 +23,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const Header = () => {
 
     const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
-    const { user } = React.useContext(SocietyContext);
+    const { user } = useAuth({ middleware: 'auth' });
 
     const handleClick = () => {
 
@@ -43,7 +42,7 @@ const Header = () => {
                 <div className="bg-sky-400 text-white text-xs py-1 flex justify-center items-center">
                     FREE CLUB OF ASOCIACIONES | CANARY ISLAND
                 </div>
-                <div className="bg-white header flex flex-row justify-between items-center px-3">
+                <div className="bg-white header grid grid-cols-5 justify-between items-center px-3">
                     {/* LOGO */}
                     <div className="flex flex-row items-center space-x-1">
                         <div>
@@ -60,7 +59,7 @@ const Header = () => {
                     {/* NAVBAR  */}
                     <Navbar />
                     {/* USER Y CARRITO */}
-                    <div className="grid grid-cols-3 md:grid-cols-4  gap-1 text-center py-2.5 justify-between items-center md:space-x-6">
+                    <div className="grid grid-cols-3 md:grid-cols-4 gap-2 ms-auto text-center py-2.5 justify-between items-center md:space-x-6">
 
                         <div className=" relative m-0 md:block hidden">
                             <Search>
@@ -82,7 +81,7 @@ const Header = () => {
                         </div>
 
                         <div>
-                            <Stack className="cursor-pointer" onClick={user ? () => handleClick() : undefined} direction="row" spacing={2}>
+                            <Stack className="cursor-pointer flex justify-center" onClick={user ? () => handleClick() : undefined} direction="row" spacing={2}>
                                 <Avatar
                                     alt={user?.name}
                                     src="/static/images/avatar/1.jpg"
