@@ -9,7 +9,7 @@ const RemoveProduct = ({ productId, onClose }) => {
         setError(null);
 
         try {
-            const response = await fetch(`http://localhost:8000/api/productos/${productId}`, {
+            const response = await fetch(`https://adrian.informaticamajada.es/api/productos/${productId}`, {
                 method: "DELETE",
             });
 

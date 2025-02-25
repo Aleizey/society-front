@@ -6,7 +6,7 @@ export const SocietyContext = createContext();
 
 const ProviderSociety = ({ children }) => {
 
-    const { views } = CrudManager({ url: 'http://localhost:8000/api/asociaciones' });
+    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/asociaciones' });
 
     const [asociaciones, setAsociaciones] = useState([]);
     const [loading, setLoading] = useState(false);
