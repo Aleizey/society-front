@@ -19,7 +19,6 @@ const SimpleLogin = () => {
           email: 'test@example.com',
           password: 'password'
         }),
-        credentials: "omit"
       });
 
       if (!response.ok) {
