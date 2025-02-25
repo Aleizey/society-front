@@ -1,12 +1,14 @@
 import { useState, useEffect, createContext } from 'react';
 import CrudManager from '../hooks/CrudManager';
 import Loading from './Loading';
+import { useAuth } from '../hooks/auth';
 
 export const SocietyContext = createContext();
 
 const ProviderSociety = ({ children }) => {
 
     const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/asociaciones' });
+    const { user } = useAuth({ middleware: 'auth' })
 
     const [asociaciones, setAsociaciones] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -20,7 +22,7 @@ const ProviderSociety = ({ children }) => {
     if (error) return <div>Error: {error}</div>;
 
     return (
-        <SocietyContext.Provider value={{ asociaciones }}>
+        <SocietyContext.Provider value={{ asociaciones, user }}>
             {children}
         </SocietyContext.Provider>
     );

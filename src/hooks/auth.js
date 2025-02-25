@@ -85,7 +85,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
   const logout = async () => {
     if (!error) {
-      await axios.post('/logout')
+      await axios.post('/api/logout')
       removeToken();
       mutate()
     }
