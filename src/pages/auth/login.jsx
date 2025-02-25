@@ -13,11 +13,13 @@ const SimpleLogin = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          "Accept": "application/json",
         },
-        body: {
+        body: JSON.stringify({
           email: 'test@example.com',
           password: 'password'
-        },
+        }),
+        credentials: "include"
       });
 
       if (!response.ok) {
