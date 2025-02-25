@@ -14,7 +14,10 @@ const SimpleLogin = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: {
+          email: 'test@example.com',
+          password: 'password'
+        },
       });
 
       if (!response.ok) {
