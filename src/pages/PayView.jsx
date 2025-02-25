@@ -1,4 +1,5 @@
 import NavbarShop from "../components/NavbarShop";
+import { Link } from "react-router";
 
 function PayView() {
     return (
@@ -59,10 +60,10 @@ function PayView() {
                             </span>
                         </div>
                     </div>
-                    <button
+                    <Link to='/carrito/envio'
                         class="bg-blue-600 text-white py-2 px-4 rounded font-bold hover:bg-blue-700 focus:outline-none focus:shadow-outline">Save
                         Card
-                    </button>
+                    </Link>
                 </div>
             </div>
         </>
