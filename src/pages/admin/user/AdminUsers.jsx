@@ -60,7 +60,7 @@ const AdminUsers = () => {
                                                     <tbody className="divide-y divide-gray-200 text-[#352c07] bg-white">
                                                         {users.map((user) => (
                                                             <tr key={user.id} className="even:bg-gray-50">
-                                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-[#352c07] bg-white">1</td>
+                                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-[#352c07] bg-white">{user.id}</td>
                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-[#352c07] bg-white">{user.name}</td>
                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-[#352c07] bg-white">{user.email}</td>
                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-[#352c07] bg-white">{user.telf}</td>
