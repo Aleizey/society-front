@@ -1,6 +1,6 @@
 import { useAuth } from 'hooks/auth'
 import { useState } from 'react'
-import {NavLink} from 'react-router';
+import {NavLink} from 'react-router-dom';
 
 const ForgotPassword = () => {
   const { forgotPassword } = useAuth({ middleware: 'guest' })

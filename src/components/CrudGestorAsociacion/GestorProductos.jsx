@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { Link, useParams } from "react-router-dom";
 import OverflowBody from "../OverflowBody";
 import { useEffect, useState } from "react";
 import AddProduct from "../CrudProduct/AddProduct";
@@ -10,8 +10,8 @@ const GestorProductos = () => {
 
     const params = useParams();
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}/productos` });
-    // const { views: viewImagenProduct } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
+    const { views } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}/productos` });
+    // const { views: viewImagenProduct } = CrudManager({ url: 'http://localhost:8000/api/productos' });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);

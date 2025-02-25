@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import AddProduct from "../components/CrudProduct/AddProduct";
-import { Link } from "react-router";
-import RemoveProduct from "../components/CrudProduct/RemoveProduct";
-import EditProduct from "../components/CrudProduct/EditProduct";
-import OverflowBody from "../components/OverflowBody";
-import CrudManager from "../hooks/CrudManager";
+import AddProduct from "../../components/CrudProduct/AddProduct";
+import { Link } from "react-router-dom";
+import RemoveProduct from "../../components/CrudProduct/RemoveProduct";
+import EditProduct from "../../components/CrudProduct/EditProduct";
+import OverflowBody from "../../components/OverflowBody";
+import CrudManager from "../../hooks/CrudManager";
+import Loading from '../../components/Loading';
 
 const AdminProductos = () => {
 
-    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
-    // const { views: viewImagenProduct } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
+    const { views } = CrudManager({ url: 'http://localhost:8000/api/productos' });
+    // const { views: viewImagenProduct } = CrudManager({ url: 'http://localhost:8000/api/productos' });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -29,7 +30,7 @@ const AdminProductos = () => {
     if (editProduct) { OverflowBody(editProduct) }
 
     if (error) return <p> Error </p>;
-    if (loading) return <p> Cargando... </p>;
+    if (loading) return <Loading />;
 
     return (
         <>
@@ -59,8 +60,8 @@ const AdminProductos = () => {
                                     </Link>
 
                                     <div onClick={() => setEditProduct(product)} className=" bg-sky-500 text-white rounded-full absolute top-0 right-0 mt-2 mr-2 p-2 shadow-2xl hover:bg-sky-800 hover:text-white transition-all cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" className="size-6">
-                                            <path  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
+                                            <path d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                                         </svg>
 
                                     </div>

@@ -1,5 +1,5 @@
-import { useParams } from "react-router";
-import { Link } from "react-router";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ModalComment from "../components/ModalComment";
 import { useEffect, useState } from "react";
 import PostComment from "../components/PostComment";
@@ -11,7 +11,7 @@ function Producto() {
 
     const params = useParams();
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/productos/${params.id}` });
+    const { views } = CrudManager({ url: `http://localhost:8000/api/productos/${params.id}` });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
