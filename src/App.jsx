@@ -11,7 +11,7 @@ import ForgotPassword from './pages/auth/forgot-password';
 import PasswordReset from './pages/auth/password-reset';
 import Carrito from './pages/Carrito';
 import PayView from './pages/PayView';
-
+import EnvioCarrito from './pages/EnvioCarrito';
 import ProviderSociety from './components/ProviderSociety'
 import Marketplace from './pages/Marketplace'
 import AdminProductos from './pages/admin/AdminProductos';
@@ -23,6 +23,7 @@ import AdminUsers from './pages/admin/user/AdminUsers';
 import CreateUsers from './pages/admin/user/CreateUsers';
 import ShowUsers from './pages/admin/user/ShowUsers';
 import UpdateUsers from './pages/admin/user/UpdateUsers';
+import ConfirmEnvio from './pages/ConfirmEnvio';
 
 function App() {
 
@@ -48,8 +49,11 @@ function App() {
             <Route path="/admin/users/:id/actualizar" element={<UpdateUsers />} />
             {/* asociacion */}
             <Route path="/admin/asociacion" element={<AdminAsociacion />} />
+            {/* Carrito Vistas */}
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/carrito/pay" element={<PayView />} />
+            <Route path="/carrito/envio" element={<EnvioCarrito />} />
+            <Route path="/carrito/confirm" element={<ConfirmEnvio />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
