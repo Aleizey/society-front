@@ -2,6 +2,7 @@ import { Avatar, Divider, MenuItem, Stack, TextField } from "@mui/material";
 import * as React from 'react';
 import CrudManager from "../hooks/CrudManager";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/auth";
 
 const currencies = [
     { value: 'Deportiva', label: 'Deportiva' },
@@ -15,13 +16,14 @@ const currencies = [
 const CreateAsociacion = () => {
 
     const { creates } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/` });
+    const { user } = useAuth({ middleware: 'auth' });
     let navigate = useNavigate();
 
     const [asociaciones, setAsociaciones] = React.useState({
         nombre: "",
         descripcion: "",
         tipo: "",
-        user_id: 1,
+        user_id: user?.id ,
     });
 
     const [errors, setErrors] = React.useState([])
