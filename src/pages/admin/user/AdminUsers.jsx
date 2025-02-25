@@ -6,7 +6,7 @@ import { Link, Route, Routes } from "react-router";
 
 const AdminUsers = () => {
 
-    const { views } = CrudManager({ url: 'http://localhost:8000/api/users' });
+    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/users' });
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
