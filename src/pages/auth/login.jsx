@@ -1,75 +1,90 @@
-import { useAuth } from '../../hooks/auth';
-import { useState } from 'react';
-import * as React from 'react';
-import Button from '@mui/material/Button';
+import { useAuth } from '../../hooks/auth'
+import { useState } from 'react'
 
+const Login = () => {
 
-const SimpleLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
+  const { login } = useAuth({
+    middleware: 'guest',
+    redirectIfAuthenticated: '/'
+  })
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState([])
+  const [status, setStatus] = useState(null)
 
-    try {
-      const response = await fetch('https://adrian.informaticamajada.es/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          email: 'test@example.com',
-          password: 'password'
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error en la solicitud');
-      }
-
-      const data = await response.json();
-      setToken(data.token); // Guardar el token en el estado
-      console.log('Token recibido:', data.token);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+  const submitForm = async event => {
+    event.preventDefault()
+    login({ email, password, setErrors, setStatus })
+  }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+    <form onSubmit={submitForm}>
+      <div>
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          className="block mt-1 w-full"
+          onChange={event => setEmail(event.target.value)}
+          required
+          autoFocus
+        />
+        {errors.email && (
+          <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+        )}
+      </div>
+      <div className="mt-4">
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          className="block mt-1 w-full"
+          onChange={event => setPassword(event.target.value)}
+          required
+          autoComplete="current-password"
+        />
+        {errors.password && (
+          <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+        )}
+      </div>
 
-      {token && (
-        <div>
-          <h2>Token recibido:</h2>
-          <p>{token}</p>
+      <div className="block mt-4">
+        <label htmlFor="remember_me" className="inline-flex items-center">
+          <input
+            id="remember_me"
+            type="checkbox"
+            name="remember"
+            className="rounded border-gray-300 text-indigo-600
+            shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+          <span className="ml-2 text-sm text-gray-600">Remember me</span>
+        </label>
+      </div>
+
+      {status && (
+        <div className="text-green-500 text-sm mt-2">
+          {status}
         </div>
       )}
-    </div>
-  );
-};
 
-export default SimpleLogin;
+      <div className="flex items-center justify-end mt-4">
+        <button className="ml-3">
+          Login
+        </button>
+      </div>
+
+      {errors.length > 0 && (
+        <div className="text-red-500 text-sm mt-2">
+          {errors.map((error, index) => (
+            <p key={index}>{error}</p>
+          ))}
+        </div>
+      )}
+    </form>
+  )
+}
+
+export default Login
