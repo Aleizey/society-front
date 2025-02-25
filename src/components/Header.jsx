@@ -9,7 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Search } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
-// import { useAuth } from "../hooks/auth";
+import { useAuth } from "../hooks/auth";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -23,8 +23,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const Header = () => {
 
     const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
-    // const { user } = useAuth({ middleware: 'auth' })
-    const user = "pablo";
+    const { user } = useAuth({ middleware: 'auth' })
 
     const handleClick = () => {
 
