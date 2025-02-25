@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import { useAuth } from '../../hooks/auth';
+import { useState } from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+
 
 const SimpleLogin = () => {
   const [email, setEmail] = useState('');
