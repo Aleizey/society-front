@@ -24,6 +24,7 @@ import CreateUsers from './pages/admin/user/CreateUsers';
 import ShowUsers from './pages/admin/user/ShowUsers';
 import UpdateUsers from './pages/admin/user/UpdateUsers';
 import ConfirmEnvio from './pages/ConfirmEnvio';
+import AdminRoute from './components/admin/AdminRoute';
 
 function App() {
 
@@ -48,8 +49,20 @@ function App() {
             <Route path="/admin/users/:id/show" element={<ShowUsers />} />
             <Route path="/admin/users/:id/actualizar" element={<UpdateUsers />} />
             {/* asociacion */}
-            <Route path="/admin/asociacion" element={<AdminAsociacion />} />
-            {/* Carrito Vistas */}
+            <Route path="/admin/asociacion" element={<AdminAsociacion />} />     
+
+            <Route element={<AdminRoute />}>
+              <Route path="/admin/productos" element={<AdminProductos />} />
+              {/* users */}
+              <Route path="/admin/users" element={<AdminUsers />} />
+              <Route path="/admin/users/crear" element={<CreateUsers />} />
+              <Route path="/admin/users/:id/show" element={<ShowUsers />} />
+              <Route path="/admin/users/:id/actualizar" element={<UpdateUsers />} />
+              {/* asociacion */}
+              <Route path="/admin/asociacion" element={<AdminAsociacion />} />
+            </Route>
+
+             {/* Carrito Vistas */}
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/carrito/pay" element={<PayView />} />
             <Route path="/carrito/envio" element={<EnvioCarrito />} />

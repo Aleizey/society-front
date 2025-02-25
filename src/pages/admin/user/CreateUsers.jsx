@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const CreateUser = () => {
 
-    const { creates } = CrudManager({ url: `http://localhost:8000/api/users` });
+    const { creates } = CrudManager({ url: `https://adrian.informaticamajada.es/api/users` });
 
     const [status, setStatus] = useState(null);
     const [errors, setErrors] = useState([]);
