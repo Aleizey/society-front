@@ -101,7 +101,7 @@ const AsociacionPage = () => {
                                         </p>
                                         <span className="flex flex-col md:flex-row items-start md:items-center space-x-3 w-min font-medium rounded-4xl mt-auto my-2">
                                             <span className="bg-sky-300 text-sm text-nowrap text-white rounded-4xl px-3 my-2 p-1">
-                                                {asociaciones.tipo ? asociaciones.nombre.toUpperCase() : ""}
+                                                {asociaciones?.tipo}
                                             </span>
                                             <span className="text-sm font-medium text-nowrap">
                                                 <strong className="text-sm ">{miembro.length}</strong> miembros

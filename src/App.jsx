@@ -17,6 +17,8 @@ import AdminProductos from './pages/admin/AdminProductos';
 import GestorProductos from './components/CrudGestorAsociacion/GestorProductos';
 import Register from './pages/auth/register';
 import CreateAsociacion from './pages/CreateAsociacion';
+import AdminAsociacion from './pages/admin/AdminAsociacion';
+import AdminUsers from './pages/admin/AdminUsers';
 
 function App() {
 
@@ -34,7 +36,9 @@ function App() {
             <Route path="/asociaciones/create" element={<CreateAsociacion />} />
             {/* <Route path="/carrito" element={<Carrito />} /> */}
             {/* only admin */}
-            <Route path="/adminProductos" element={<AdminProductos />} />
+            <Route path="/admin/productos" element={<AdminProductos />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/asociacion" element={<AdminAsociacion />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

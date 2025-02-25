@@ -10,7 +10,7 @@ export default function CrudManager({ url }) {
         setLoading(true);
         axios
             .get(url)
-            .then(res => { setData(res.data.data); })
+            .then(res => { setData(res.data.data ?? res.data); })
             .catch(error => {
                 setErrors(
                     Object.values(error.response.data.errors).flat());
@@ -18,10 +18,11 @@ export default function CrudManager({ url }) {
             .finally(() => { setLoading(false); });
     };
 
-    const creates = async ({ setErrors, setStatus, ...props }) => {
+    const creates = ({ setErrors, setStatus, ...props }) => {
         setErrors([]);
         setStatus(null);
-        axios
+
+        return axios
             .post(url, props.data, headers)
             .then((res) => {
                 setStatus("success");
@@ -32,8 +33,10 @@ export default function CrudManager({ url }) {
                     setErrors(Object.values(error.response.data.errors).flat());
                 }
                 setStatus("error");
+                throw error;
             });
     };
+
 
     const updates = async ({ setErrors, setStatus, ...props }) => {
         console.log("comenzando...")
