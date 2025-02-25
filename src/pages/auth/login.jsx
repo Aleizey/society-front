@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const Login = () => {
-  const BASE_URL = "http://localhost:8000";
+  const BASE_URL = "https://adrian.informaticamajada.es/";
 
   // 🔹 Función para guardar y recuperar el token desde localStorage
   const saveToken = (token) => localStorage.setItem("authToken", token);
