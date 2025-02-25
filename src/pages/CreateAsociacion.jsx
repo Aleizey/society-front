@@ -14,7 +14,7 @@ const currencies = [
 
 const CreateAsociacion = () => {
 
-    const { creates } = CrudManager({ url: `https://adrian.informaticamajada.es//api/asociaciones/` });
+    const { creates } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/` });
     let navigate = useNavigate();
 
     const [asociaciones, setAsociaciones] = React.useState({

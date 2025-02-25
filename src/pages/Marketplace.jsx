@@ -7,8 +7,8 @@ import Loading from "../components/Loading";
 
 const Marketplace = () => {
 
-    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es//api/productos' });
-    // const { views: viewImagenProduct } = CrudManager({ url: 'https://adrian.informaticamajada.es//api/productos' });
+    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
+    // const { views: viewImagenProduct } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);

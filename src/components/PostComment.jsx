@@ -3,7 +3,7 @@ import CrudManager from "../hooks/CrudManager";
 
 const PostComment = ({ product }) => {
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es//api/comentarios` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/comentarios` });
 
     const [comentarios, setComentarios] = useState([]);
     const [loading, setLoading] = useState(false);

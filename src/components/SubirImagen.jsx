@@ -27,7 +27,7 @@ const SubirImagen = () => {
         formData.append("producto_id", productoId);
 
         try {
-            const response = await fetch("https://adrian.informaticamajada.es///api/imagenes", {
+            const response = await fetch("https://adrian.informaticamajada.es//api/imagenes", {
                 method: "POST",
                 body: formData
             });

@@ -7,7 +7,7 @@ import Loading from "../../../components/Loading"
 const UpdateUsers = () => {
 
     const { id } = useParams();
-    const { updates } = CrudManager({ url: `https://adrian.informaticamajada.es//api/users/${id}` });
+    const { updates } = CrudManager({ url: `https://adrian.informaticamajada.es/api/users/${id}` });
 
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
@@ -15,7 +15,7 @@ const UpdateUsers = () => {
     const [status, setStatus] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es//api/users/${id}` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/users/${id}` });
 
 
     useEffect(() => {

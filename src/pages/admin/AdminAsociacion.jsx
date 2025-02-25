@@ -7,7 +7,7 @@ import ModalAprobar from "../../components/admin/ModalAprobar";
 import OverflowBody from "../../components/OverflowBody";
 
 const AdminAsociacion = () => {
-    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es//api/asociaciones/pendientes' });
+    const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/asociaciones/pendientes' });
 
     const [asociaciones, setAsociaciones] = useState([]);
     const [loading, setLoading] = useState(false);
