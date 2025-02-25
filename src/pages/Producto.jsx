@@ -53,7 +53,7 @@ function Producto() {
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
                     </div>
 
-                    <div className="w-auto self-start sticky top-20 h-fit p-4 bg-white">
+                    <div className="md:w-auto self-start sticky w-full top-20 h-fit p-4 bg-white">
                         <div className="w-full h-full">
                             <h2 className="text-xl font-bold"> {productos.nombre ? productos.nombre.toUpperCase() : ""} </h2>
                             <div className="mb-4 mt-2">

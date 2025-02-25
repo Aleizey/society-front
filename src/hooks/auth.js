@@ -42,7 +42,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     setErrors([])
     setStatus(null)
     axios
-      .post('/login', props)
+      .post('/api/login', props)
       .then((response) => {
         setToken(response.data.token);
         mutate();
