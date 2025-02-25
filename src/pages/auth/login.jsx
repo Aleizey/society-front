@@ -1,22 +1,58 @@
-import { useAuth } from '../../hooks/auth'
-import { useState } from 'react'
+import { useState } from 'react';
 
 const Login = () => {
+  const BASE_URL = "http://localhost:8000";
 
-  const { login } = useAuth({
-    middleware: 'guest',
-    redirectIfAuthenticated: '/'
-  })
+  // 🔹 Función para guardar y recuperar el token desde localStorage
+  const saveToken = (token) => localStorage.setItem("authToken", token);
+  const getToken = () => localStorage.getItem("authToken");
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [errors, setErrors] = useState([])
-  const [status, setStatus] = useState(null)
+  // 🔹 Función para hacer login y guardar el token
+  const login = async (email, password) => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-  const submitForm = async event => {
-    event.preventDefault()
-    login({ email, password, setErrors, setStatus })
-  }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `Error ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log("✅ Login exitoso, token recibido:", data.token);
+
+      // Guardar el token en localStorage
+      saveToken(data.token);
+
+      return data;
+    } catch (error) {
+      console.error("❌ Error en login:", error.message);
+      throw error;
+    }
+  };
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState([]);
+  const [status, setStatus] = useState(null);
+
+  const submitForm = async (event) => {
+    event.preventDefault();
+    setErrors([]); // Limpiar errores anteriores
+    setStatus(null); // Limpiar estado anterior
+
+    try {
+      const data = await login(email, password);
+      setStatus("Login exitoso! Redirigiendo...");
+      // Aquí podrías redirigir al usuario a otra página, por ejemplo:
+      // window.location.href = '/dashboard';
+    } catch (error) {
+      setErrors([error.message]); // Mostrar el mensaje de error
+    }
+  };
 
   return (
     <form onSubmit={submitForm}>
@@ -27,7 +63,7 @@ const Login = () => {
           type="email"
           value={email}
           className="block mt-1 w-full"
-          onChange={event => setEmail(event.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           required
           autoFocus
         />
@@ -42,7 +78,7 @@ const Login = () => {
           type="password"
           value={password}
           className="block mt-1 w-full"
-          onChange={event => setPassword(event.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           required
           autoComplete="current-password"
         />
@@ -57,8 +93,7 @@ const Login = () => {
             id="remember_me"
             type="checkbox"
             name="remember"
-            className="rounded border-gray-300 text-indigo-600
-            shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           <span className="ml-2 text-sm text-gray-600">Remember me</span>
         </label>
@@ -71,7 +106,7 @@ const Login = () => {
       )}
 
       <div className="flex items-center justify-end mt-4">
-        <button className="ml-3">
+        <button type="submit" className="ml-3">
           Login
         </button>
       </div>
@@ -84,7 +119,7 @@ const Login = () => {
         </div>
       )}
     </form>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
