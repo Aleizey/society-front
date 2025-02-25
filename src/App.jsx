@@ -9,7 +9,8 @@ import Login from './pages/auth/login';
 import NotFound from './pages/auth/404';
 import ForgotPassword from './pages/auth/forgot-password';
 import PasswordReset from './pages/auth/password-reset';
-// import Carrito from './pages/Carrito';
+import Carrito from './pages/Carrito';
+import PayView from './pages/PayView';
 
 import ProviderSociety from './components/ProviderSociety'
 import Marketplace from './pages/Marketplace'
@@ -47,6 +48,8 @@ function App() {
             <Route path="/admin/users/:id/actualizar" element={<UpdateUsers />} />
             {/* asociacion */}
             <Route path="/admin/asociacion" element={<AdminAsociacion />} />
+            <Route path="/carrito" element={<Carrito />} />
+            <Route path="/carrito/pay" element={<PayView />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
