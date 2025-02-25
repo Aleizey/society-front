@@ -1,6 +1,6 @@
 import { useAuth } from 'hooks/auth'
 import { useEffect, useState } from 'react'
-import {Link, useParams} from 'react-router';
+import {Link, useParams} from 'react-router-dom';
 
 const PasswordReset = () => {
   const params = useParams()

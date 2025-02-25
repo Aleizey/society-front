@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router-dom";
 import Logo from "../resource/images/logo.png";
 import Navbar from "./Navbar";
 import { Avatar, Badge, Divider, IconButton, Stack } from "@mui/material";
@@ -9,7 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Search } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
-import { useAuth } from "../hooks/auth";
+// import { useAuth } from "../hooks/auth";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -23,7 +23,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const Header = () => {
 
     const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
-    const { user } = useAuth({ middleware: 'auth' })
+    // const { user } = useAuth({ middleware: 'auth' })
+    const user = "pablo";
 
     const handleClick = () => {
 
@@ -39,18 +40,20 @@ const Header = () => {
     return (
         <>
             <div className="sticky min-h-min top-0 z-3">
-                <div className="bg-sky-600 text-white text-xs py-1 flex justify-center items-center">
+                <div className="bg-sky-400 text-white text-xs py-1 flex justify-center items-center">
                     FREE CLUB OF ASOCIACIONES | CANARY ISLAND
                 </div>
-                <div className="bg-white flex flex-row justify-between items-center px-3 border-b-1 border-gray-300">
+                <div className="bg-white header flex flex-row justify-between items-center px-3">
                     {/* LOGO */}
                     <div className="flex flex-row items-center space-x-1">
                         <div>
-                            <img src={Logo} alt="" width={130} />
+                            <Link to="/">
+                                <img src={Logo} alt="" width={55} />
+                            </Link>
                         </div>
                         <div className="flex md:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" className="size-8">
-                                <path  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-8">
+                                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </div>
                     </div>

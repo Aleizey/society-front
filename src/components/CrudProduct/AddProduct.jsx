@@ -4,7 +4,7 @@ function AddProduct({ onClose, asociacionId }) {
     const [isClothing, setIsClothing] = useState(false);
     const [product, setProduct] = useState({
         nombre: "",
-        descripcion: "Descripcion generica",
+        descripcion: "",
         precio: "",
         stock: "",
         isRopa: 0,
@@ -29,7 +29,7 @@ function AddProduct({ onClose, asociacionId }) {
         });
 
         try {
-            const response = await fetch("https://adrian.informaticamajada.es/api/productos", {
+            const response = await fetch("http://localhost:8000/api/productos", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

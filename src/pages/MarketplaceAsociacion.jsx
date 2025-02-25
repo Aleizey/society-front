@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
-import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CrudManager from "../hooks/CrudManager";
 
 const Marketplace = () => {
 
     const params = useParams();
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}/productos` });
+    const { views } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${params.id}/productos` });
 
     const [ProductosAsociacion, setProductosAsociacion] = useState([]);
     const [loading, setLoading] = useState(false);
