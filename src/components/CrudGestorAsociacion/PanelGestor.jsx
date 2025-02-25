@@ -11,7 +11,7 @@ const PanelGestor = ({ asociacion, params, onClose }) => {
     const [modalVistaGeneral, setModalVistaGeneral] = useState(false);
     OverflowBody(modalVistaGeneral)
 
-    const { views } = CrudManager({ url: `http://localhost:8000/api/users/${asociacion.user_id}` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es//api/users/${asociacion.user_id}` });
 
     const [gestor, setGestor] = useState([]);
     const [loading, setLoading] = useState(false);

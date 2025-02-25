@@ -35,7 +35,7 @@ const CustomButton = styled(Button)({
 
 const ModalVistaGeneral = ({ datosAso, onClose }) => {
 
-    const { updates } = CrudManager({ url: `http://localhost:8000/api/asociaciones/${datosAso.id}` });
+    const { updates } = CrudManager({ url: `https://adrian.informaticamajada.es//api/asociaciones/${datosAso.id}` });
 
     const [product, setProduct] = useState({
         nombre: datosAso.nombre || "",

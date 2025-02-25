@@ -6,7 +6,7 @@ const ShowUsers = () => {
 
     const idUser = useParams().id;
 
-    const { views } = CrudManager({ url: `http://localhost:8000/api/users/${idUser}` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es//api/users/${idUser}` });
 
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);

@@ -11,7 +11,7 @@ function Producto() {
 
     const params = useParams();
 
-    const { views } = CrudManager({ url: `http://localhost:8000/api/productos/${params.id}` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es//api/productos/${params.id}` });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);

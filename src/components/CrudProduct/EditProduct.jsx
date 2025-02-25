@@ -30,7 +30,7 @@ function EditProduct({ productFull, onClose }) {
         });
 
         try {
-            const response = await fetch(`http://localhost:8000/api/productos/${productFull.id}`, {
+            const response = await fetch(`https://adrian.informaticamajada.es//api/productos/${productFull.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
