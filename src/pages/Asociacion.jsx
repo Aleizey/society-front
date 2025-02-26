@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PanelGestor from "../components/CrudGestorAsociacion/PanelGestor";
 import { useEffect, useState } from "react";
@@ -12,6 +12,7 @@ const AsociacionPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [handlePanel, setHandlePanel] = useState(false);
     const section = searchParams.get("section") || "general";
+    const navigate = useNavigate();
 
     const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}` });
     const { views: miembros } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${params.id}/users` });
@@ -27,8 +28,8 @@ const AsociacionPage = () => {
     console.log(miembro.length == 0 ? 1 : miembro.length)
 
     useEffect(() => {
-        views({ setData: setAsociaciones, setLoading, setErrors: setError });
-        miembros({ setData: setMiembro, setLoading, setErrors: setError });
+        views({ setData: setAsociaciones, setLoading, setErrors: setError, navigate });
+        miembros({ setData: setMiembro, setLoading, setErrors: setError, navigate });
     }, []);
 
     const handleSectionChange = (newSection) => {

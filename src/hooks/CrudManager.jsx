@@ -6,7 +6,7 @@ export default function CrudManager({ url }) {
         'Content-Type': 'application/json',
     };
 
-    const views = ({ setData, setLoading, setErrors }) => {
+    const views = ({ setData, setLoading, setErrors, navigate }) => {
         setLoading(true);
         axios
             .get(url)
@@ -14,6 +14,7 @@ export default function CrudManager({ url }) {
             .catch(error => {
                 setErrors(
                     Object.values(error.response.data.errors).flat());
+                navigate("/");
             })
             .finally(() => { setLoading(false); });
     };

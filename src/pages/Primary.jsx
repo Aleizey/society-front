@@ -16,26 +16,51 @@ const Primary = () => {
     const [error, setError] = useState(null);
 
     const [asoUsers, setAsoUsers] = useState({});
+    const [ordenar, setordenar] = useState("default");
 
     useEffect(() => {
         asociaciones.forEach((dataAso) => {
             const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/asociaciones/${dataAso.id}/users` });
 
             views({
-                setData: (users) => setAsoUsers((prevState) => ({ ...prevState, [dataAso.id]: users, })),
-                setLoading,
-                setErrors: setError,
+                setData: (users) => setAsoUsers((prevState) => ({ ...prevState, [dataAso.id]: users })), setLoading, setErrors: setError,
             });
         });
     }, [asociaciones]);
 
     if (loading) return <Loading />;
 
+    const ordenarOptions = {
+        "asc": (a, b) => a.nombre.localeCompare(b.nombre),
+        "desc": (a, b) => b.nombre.localeCompare(a.nombre),
+        "created-desc": (a, b) => new Date(b.created_at) - new Date(a.created_at),
+        "created-asc": (a, b) => new Date(a.created_at) - new Date(b.created_at),
+    };
+
+    const ordenarAsocion = [...asociaciones].sort(ordenarOptions[ordenar] || (() => 0));
+
     return (
         <>
-            {asociaciones.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center md:gap-8 gap-2 mt-12 lg:px-8 px-2">
-                    {asociaciones.map((dataAso) => {
+            {asociaciones.length > 0 && (
+                <div className="mt-4 text-center top-21 p-2 sticky z-10 ">
+                    <button
+                        onClick={() => setordenar(ordenar === "asc" ? "desc" : "asc")}
+                        className="bg-sky-200 text-sky-800 px-4 py-2 rounded-full mr-2 cursor-pointer shadow-2xl "
+                    >
+                        Ordenar por Nombre - {ordenar === "asc" ? "A/z" : "Z/a"}
+                    </button>
+                    <button
+                        onClick={() => setordenar(ordenar === "created-desc" ? "created-asc" : "created-desc")}
+                        className="bg-sky-200 text-sky-800 px-4 py-2 rounded-full cursor-pointer shadow-2xl "
+                    >
+                        Ordenar por Creación - {ordenar === "created-desc" ? "New" : "Old"}
+                    </button>
+                </div>
+            )}
+
+            {ordenarAsocion.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center md:gap-8 gap-2 mt-4 lg:px-8 px-2">
+                    {ordenarAsocion.map((dataAso) => {
                         const { creates } = CrudManager({
                             url: `https://adrian.informaticamajada.es/api/asociaciones/${dataAso.id}/users/associate`,
                         });
