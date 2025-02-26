@@ -6,6 +6,7 @@ import EditProduct from "../../components/CrudProduct/EditProduct";
 import OverflowBody from "../../components/OverflowBody";
 import CrudManager from "../../hooks/CrudManager";
 import Loading from '../../components/Loading';
+import PulseElement from "../../components/pulseElements";
 
 const AdminProductos = () => {
 
@@ -30,7 +31,7 @@ const AdminProductos = () => {
     if (editProduct) { OverflowBody(editProduct) }
 
     if (error) return <p> Error </p>;
-    if (loading) return <Loading />;
+    if (loading) return <PulseElement />;
 
     return (
         <>

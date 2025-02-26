@@ -171,7 +171,7 @@ function Producto() {
             </div>
 
             {/* Comentarios */}
-            <PostComment product={productos.id} />
+            <PostComment product={params.id} />
         </>
     );
 

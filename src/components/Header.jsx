@@ -10,6 +10,7 @@ import { Search } from "@mui/icons-material";
 import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
 import { useAuth } from "../hooks/auth";
+import SearchPanel from "./SearchPanel";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -25,6 +26,8 @@ const Header = () => {
     const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
     const { user } = useAuth({ middleware: 'auth' });
 
+    const [search, setSearch] = React.useState(false);
+
     const handleClick = () => {
 
         if (modalProfile) {
@@ -38,6 +41,8 @@ const Header = () => {
 
     return (
         <>
+            {search && <SearchPanel onClose={() => setSearch(false)} />}
+
             <div className="sticky min-h-min top-0 z-3">
                 <div className="bg-sky-400 text-white text-xs py-1 flex justify-center items-center">
                     FREE CLUB OF ASOCIACIONES | CANARY ISLAND
@@ -61,7 +66,7 @@ const Header = () => {
                     {/* USER Y CARRITO */}
                     <div className="grid grid-cols-3 md:grid-cols-4 gap-2 ms-auto text-center py-2.5 justify-between items-center md:space-x-6">
 
-                        <div className=" relative m-0 md:block hidden">
+                        <div onClick={() => setSearch(true)} className="hover:bg-gray-100 transition-all cursor-pointer py-2 rounded-full  relative m-0 md:block hidden">
                             <Search>
                                 <SearchIcon />
                             </Search>

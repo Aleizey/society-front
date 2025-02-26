@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CrudManager from "../hooks/CrudManager";
 import { useAuth } from "../hooks/auth";
 import Loading from "../components/Loading";
+import PulseElement from "../components/pulseElements";
 
 const Primary = () => {
     const { asociaciones } = useContext(SocietyContext);
@@ -28,7 +29,7 @@ const Primary = () => {
         });
     }, [asociaciones]);
 
-    if (loading) return <Loading />;
+    if (loading) return <PulseElement />;
 
     const ordenarOptions = {
         "asc": (a, b) => a.nombre.localeCompare(b.nombre),
