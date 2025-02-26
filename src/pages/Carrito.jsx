@@ -1,4 +1,5 @@
 import NavbarShop from "../components/NavbarShop";
+import { Link } from "react-router";
 
 const Carrito = () => {
 
@@ -111,9 +112,9 @@ const Carrito = () => {
                                 <span>Total cost</span>
                                 <span>$600</span>
                             </div>
-                            <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                            <Link to='/carrito/pay' class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                                 Checkout
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

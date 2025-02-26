@@ -1,5 +1,5 @@
 const NavbarShop = ({ currentStep }) => {
-    const steps = ["SHIPPING", "PAYMENT", "OPTIONS", "CONFIRMATION"];
+    const steps = ["CARRITO", "PAGO", "ENVIO", "CONFIRMACION"];
   
     return (
       <div className="max-w-4xl mx-auto p-4">
