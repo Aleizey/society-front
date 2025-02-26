@@ -4,7 +4,6 @@ export default function CrudManager({ url }) {
 
     const headers = {
         'Content-Type': 'application/json',
-        "Content-Type": "multipart/form-data",
     };
 
     const views = ({ setData, setLoading, setErrors, navigate }) => {
