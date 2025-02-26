@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ModalComment from "../components/ModalComment";
 import { useEffect, useState } from "react";
@@ -6,16 +6,24 @@ import PostComment from "../components/PostComment";
 import Rating from '@mui/material/Rating';
 import OverflowBody from "../components/OverflowBody";
 import CrudManager from "../hooks/CrudManager";
+import { useAuth } from "../hooks/auth";
+import axios from "axios";
 
+let controller = 0;
 function Producto() {
 
     const params = useParams();
 
-    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/productos/${params.id}` });
+    // Server
+    // const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
+
+    // Local
+    const { views } = CrudManager({ url: `http://localhost:8000/api/productos/${params.id}` });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [dataPedido, setDataPedido] = useState([]);
 
     const [comment, setComment] = useState(null);
     // const [value, setValue] = useState(2);
@@ -24,6 +32,44 @@ function Producto() {
     useEffect(() => {
         views({ setData: setProductos, setLoading, setErrors: setError });
     }, []);
+
+    // ----------------------------------------------------------
+
+    const { user } = useAuth({ middleware: 'auth' });
+    const idUser = user?.id;
+
+    useEffect(() => {
+        if (user?.id !== undefined && controller === 0) {
+            controller = 1;
+
+            axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
+                .then(pedido => {
+                    setDataPedido(pedido.data.data);
+                    setLoading(false);
+                })
+                .catch(error => {
+                    setError(error);
+                    setLoading(false);
+                });
+        }
+    }, [user, idUser]);
+
+    const aniadirCarrito = () => {
+        setLoading(true); // Activa el estado de carga
+
+        axios.post(`http://localhost:8000/api/pedidos/${dataPedido[0]?.id}/productos/associate`, {
+            related_key: params.id // Envía el ID del producto que deseas asociar al pedido
+        })
+            .then(response => {
+                setLoading(false);
+            })
+            .catch(error => {
+                // Maneja el error
+                setError(error);
+                setLoading(false);
+                console.error("Error al asociar productos al pedido:", error);
+            });
+    };
 
     if (error) return <p> Error </p>;
     if (loading) return <p> Cargando </p>;
@@ -117,13 +163,15 @@ function Producto() {
                                         {/* <Link className="bg-blue-500 px-2 py-0.5 font-semibold text-sm rounded-sm text-white" to={`/asociacion/${productos.asociacion_id}`}> Go Asociacion </Link> */}
                                     </div>
 
-                                    <Link to={'/carrito'}
-                                        className="bg-sky-600 flex col-span-2 gap-2 items-center justify-center text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 py-2.5 w-full focus:ring-offset-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
-                                            <path d="M12 4.5v15m7.5-7.5h-15" />
-                                        </svg>
-                                        AÑADIR
-                                    </Link>
+                                    <button onClick={aniadirCarrito} disabled={loading}>
+                                        <Link
+                                            className="bg-sky-600 flex col-span-2 gap-2 items-center justify-center text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 py-2.5 w-full focus:ring-offset-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
+                                                <path d="M12 4.5v15m7.5-7.5h-15" />
+                                            </svg>
+                                            AÑADIR
+                                        </Link>
+                                    </button>
                                 </div>
                                 <button type="button" onClick={() => setComment(productos)}
                                     className="bg-gray-300 w-full justify-center cursor-pointer flex gap-2 items-center  text-gray-800 px-6 py-2.5 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" >
@@ -171,7 +219,7 @@ function Producto() {
             </div>
 
             {/* Comentarios */}
-            <PostComment product={productos.id} />
+            <PostComment product={params.id} />
         </>
     );
 
