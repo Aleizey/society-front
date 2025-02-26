@@ -42,7 +42,7 @@ const Header = () => {
                 <div className="bg-sky-400 text-white text-xs py-1 flex justify-center items-center">
                     FREE CLUB OF ASOCIACIONES | CANARY ISLAND
                 </div>
-                <div className="bg-white header grid grid-cols-5 justify-between items-center px-3">
+                <div className="bg-white header grid md:grid-cols-5 grid-cols-2 justify-between items-center px-3">
                     {/* LOGO */}
                     <div className="flex flex-row items-center space-x-1">
                         <div>
