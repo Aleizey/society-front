@@ -8,7 +8,11 @@ import PulseElement from "../components/pulseElements";
 
 const Marketplace = () => {
 
+    // Server
     const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
+
+    // Local
+    // const { views } = CrudManager({ url: 'http://localhost:8000/api/productos' });
     // const { views: viewImagenProduct } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
 
     const [productos, setProductos] = useState([]);
