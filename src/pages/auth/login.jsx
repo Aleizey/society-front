@@ -2,6 +2,7 @@ import { useAuth } from '../../hooks/auth';
 import { useState } from 'react';
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router';
 
 const Login = () => {
 
@@ -29,7 +30,7 @@ const Login = () => {
       <div className="relative z-10 bg-white p-8 rounded-md shadow-lg">
         <h1
           className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-sky-400 to-cyan-500 pb-2 text-center">
-          Login
+          Iniciar Sesion
         </h1>
         <form onSubmit={submitForm}>
           {/* Email Address */}
@@ -56,11 +57,13 @@ const Login = () => {
               Iniciar sesion
             </Button>
 
-            <Button
-              variant="contained"
-              type="button">
-              Crear Cuenta
-            </Button>
+            <Button 
+                variant="contained"
+                type="button">
+                  <Link to='/register'>
+                Crear Cuenta
+                </Link>
+              </Button>
           </div>
           <div className="flex items-center justify-between gap-8 pt-2">
             <Button>
