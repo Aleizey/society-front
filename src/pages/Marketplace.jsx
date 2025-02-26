@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CrudManager from "../hooks/CrudManager";
 import Loading from "../components/Loading";
+import PulseElement from "../components/pulseElements";
 
 
 const Marketplace = () => {
@@ -24,7 +25,7 @@ const Marketplace = () => {
     }, []);
 
     if (error) return <p> Error </p>;
-    if (loading) return <Loading />;
+    if (loading) return <PulseElement />;
 
     return (
         <>

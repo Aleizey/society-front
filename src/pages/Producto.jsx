@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ModalComment from "../components/ModalComment";
 import { useEffect, useState } from "react";
@@ -219,7 +219,7 @@ function Producto() {
             </div>
 
             {/* Comentarios */}
-            <PostComment product={productos.id} />
+            <PostComment product={params.id} />
         </>
     );
 

@@ -23,7 +23,7 @@ const CreateAsociacion = () => {
         nombre: "",
         descripcion: "",
         tipo: "",
-        user_id: user?.id ,
+        user_id: user?.id,
     });
 
     const [errors, setErrors] = React.useState([])
