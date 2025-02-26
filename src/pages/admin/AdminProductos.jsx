@@ -26,7 +26,7 @@ const AdminProductos = () => {
     const [removeProduct, setRemoveProduct] = useState(null);
     const [editProduct, setEditProduct] = useState(null);
 
-    if (addProduct) { OverflowBody(addProduct) }
+    OverflowBody(addProduct)
     if (removeProduct) { OverflowBody(removeProduct) }
     if (editProduct) { OverflowBody(editProduct) }
 

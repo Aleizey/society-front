@@ -7,6 +7,7 @@ import * as React from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import axios from 'axios';
 import CrudManager from '../../hooks/CrudManager';
+import { useNavigate } from 'react-router';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -80,6 +81,7 @@ const ModalVistaGeneral = ({ datosAso, onClose }) => {
         console.log("Datos antes de enviar:", updatedFields);
         updates({ product: updatedFields, setErrors, setStatus });
         onClose()
+
     };
 
     return (

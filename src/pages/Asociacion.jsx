@@ -49,17 +49,11 @@ const AsociacionPage = () => {
 
     if (error) return <p> Error </p>;
     if (loading) return <PulseElement />;
-
     return (
         <>
             {/* contenedor general */}
             <div className={"flex flex-row relative min-h-screen w-full"}>
                 {/* aside */}
-                {gestor && (
-                    <>
-                        {console.log("HOLA")}
-                    </>
-                )}
                 {handlePanel && gestor ? (
                     <PanelGestor asociacion={asociaciones} params={params} onClose={() => setHandlePanel(false)} />
                 ) : (
@@ -75,9 +69,9 @@ const AsociacionPage = () => {
                 )}
 
                 {/* contenedor de info */}
-                <div className="bg-gray-50 lg:px-10 w-full ">
+                <div className="bg-gray-400/20 w-full ">
                     {/* header del grupo */}
-                    <div>
+                    <div className="bg-white shadow  lg:px-10">
                         {/* portada */}
                         <div className=" rounded-b-sm w-full h-90 flex justify-center overflow-hidden relative">
                             <img className="w-full h-full object-cover object-top" src={asociaciones.imagenPrincipal} alt="" />
@@ -96,18 +90,7 @@ const AsociacionPage = () => {
                                             <span className="text-nowrap text-ellipsis overflow-hidden  ">
                                                 {asociaciones.nombre ? asociaciones.nombre.toUpperCase() : ""}
                                             </span>
-                                            <span className="bg-gray-400 text-white lg:ms-2 relative rounded-xl p-1
-                                            before:left-11 
-                                            before:bg-gray-600 
-                                            before:px-3 
-                                            before:text-lg 
-                                            before:top-0  
-                                            before:rounded-4xl
-                                            before:rounded-bl-none
-                                            before:text-white
-                                            before:font-medium
-                                            hover:before:content-['publico'] 
-                                            before:absolute">
+                                            <span className="bg-gray-300 text-white lg:ms-2 relative rounded-full p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-7">
                                                     <path d="m6.115 5.19.319 1.913A6 6 0 0 0 8.11 10.36L9.75 12l-.387.775c-.217.433-.132.956.21 1.298l1.348 1.348c.21.21.329.497.329.795v1.089c0 .426.24.815.622 1.006l.153.076c.433.217.956.132 1.298-.21l.723-.723a8.7 8.7 0 0 0 2.288-4.042 1.087 1.087 0 0 0-.358-1.099l-1.33-1.108c-.251-.21-.582-.299-.905-.245l-1.17.195a1.125 1.125 0 0 1-.98-.314l-.295-.295a1.125 1.125 0 0 1 0-1.591l.13-.132a1.125 1.125 0 0 1 1.3-.21l.603.302a.809.809 0 0 0 1.086-1.086L14.25 7.5l1.256-.837a4.5 4.5 0 0 0 1.528-1.732l.146-.292M6.115 5.19A9 9 0 1 0 17.18 4.64M6.115 5.19A8.965 8.965 0 0 1 12 3c1.929 0 3.716.607 5.18 1.64" />
                                                 </svg>
@@ -124,21 +107,21 @@ const AsociacionPage = () => {
                                     </div>
                                 </div>
                                 <div className="col-span-1 grid lg:grid-cols-2 grid-cols-1 gap-1 md:mt-auto mt-2 ">
-                                    <button className="bg-sky-500 flex flex-row items-center justify-center space-x-2 text-sm rounded-sm text-ellipsis text-nowrap overflow-hidden text-white p-2 w-full hover:bg-sky-950 transition-all cursor-pointer">
+                                    <button className="bg-sky-200 flex flex-row items-center justify-center space-x-2 text-sm rounded-sm text-ellipsis text-nowrap overflow-hidden text-sky-600 p-2 w-full hover:bg-sky-500 hover:text-sky-200 transition-all cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
                                             <path d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                                         </svg>
                                         <p className="text-nowrap text-ellipsis overflow-hidden">
-                                            {miembro.some(e => e.id === user?.id) ? "UNIDO" : "UNIRSE AL GRUPO"}
+                                            {miembro.some(e => e.id === user?.id) ? "UNIDO" : "Unirse a la asociación"}
                                         </p>
                                     </button>
-                                    <button className="bg-gray-300 flex flex-row items-center justify-center space-x-2   rounded-sm text-ellipsis text-nowrap overflow-hidden text-black p-2 w-full hover:bg-gray-950 hover:text-white transition-all cursor-pointer">
+                                    <button className="bg-gray-200 flex flex-row items-center justify-center space-x-2   rounded-sm text-ellipsis text-nowrap overflow-hidden text-gray-600 p-2 w-full hover:bg-gray-400 hover:text-white transition-all cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
                                             <path d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
                                         </svg>
 
                                         <p className="text-nowrap text-ellipsis overflow-hidden">
-                                            COMPARTIR
+                                            Compartir
                                         </p>
                                     </button>
                                 </div>
@@ -170,7 +153,7 @@ const AsociacionPage = () => {
                                             {articles.map((article) => (
                                                 <article
                                                     key={article.id}
-                                                    className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 dark:bg-gray-700 px-8 py-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
+                                                    className=" relative isolate flex flex-col justify-end overflow-hidden rounded-xl bg-gray-900 dark:bg-gray-700 px-8 py-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
                                                 >
                                                     <img src={article.image} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
                                                     <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>

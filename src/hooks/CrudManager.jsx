@@ -4,6 +4,7 @@ export default function CrudManager({ url }) {
 
     const headers = {
         'Content-Type': 'application/json',
+        "Content-Type": "multipart/form-data",
     };
 
     const views = ({ setData, setLoading, setErrors, navigate }) => {
@@ -21,7 +22,7 @@ export default function CrudManager({ url }) {
 
     const creates = ({ setErrors, setStatus, ...props }) => {
         console.log("comenzando...")
-        console.log("datos para crear:", props.product)
+        console.log("datos para crear:", props.data)
         setErrors([]);
         setStatus(null);
         return axios
@@ -56,14 +57,15 @@ export default function CrudManager({ url }) {
 
     const deletes = async ({ setErrors, setStatus, ElementId }) => {
         setErrors([]);
-        setStatus(null);
-        axios
-            .delete(`${url}/${ElementId}`,)
-            .then(res => res.data)
-            .catch(error => {
-                setErrors(
-                    Object.values(error.response.data.errors).flat());
-            });
+        setStatus(true); // Iniciar el estado de carga
+
+        try {
+            await axios.delete(`${url}/${ElementId}`);
+        } catch (error) {
+            setErrors(error.response?.data?.errors ? Object.values(error.response.data.errors).flat() : ["Error desconocido"]);
+        } finally {
+            setStatus(false); // Asegurar que el estado se actualice después de la petición
+        }
     };
 
     return {

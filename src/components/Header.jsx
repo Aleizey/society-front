@@ -23,7 +23,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Header = () => {
 
-    const [modalProfile, setModalProfile] = React.useState(false, { tipo: 0 });
+    const [modalProfile, setModalProfile] = React.useState(false);
     const { user } = useAuth({ middleware: 'auth' });
 
     const [search, setSearch] = React.useState(false);

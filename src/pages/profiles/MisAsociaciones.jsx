@@ -3,6 +3,7 @@ import { useAuth } from "../../hooks/auth";
 import CrudManager from "../../hooks/CrudManager";
 import { Link } from "react-router";
 import { Divider } from "@mui/material";
+import PulseElement from "../../components/pulseElements";
 
 const MisAsociaciones = () => {
 
@@ -21,6 +22,8 @@ const MisAsociaciones = () => {
     const [AsociacionGestor, setAsociacionGestor] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    if (loading) return <PulseElement />;
 
     const gestor = AsociacionGestor?.filter(asociacion => asociacion.user_id === user?.id) || [];
 

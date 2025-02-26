@@ -112,15 +112,15 @@ const Primary = () => {
                                 <div
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        if (!isJoined) handleClick();
+                                        if (!isJoined || !user?.admin == 1) handleClick();
                                     }}
                                     className="flex justify-between py-1.5 px-1.5"
                                 >
                                     <button
-                                        className={`bg-sky-200 text-sky-500 rounded-full text-ellipsis text-nowrap overflow-hidden font-bold p-2 w-full transition-all ${isJoined ? "cursor-not-allowed opacity-50" : "hover:bg-sky-400 hover:text-white cursor-pointer"
+                                        className={`bg-sky-200 text-sky-500 rounded-full text-ellipsis text-nowrap overflow-hidden font-bold p-2 w-full transition-all ${isJoined || user?.admin == true ? "cursor-not-allowed opacity-50" : "hover:bg-sky-400 hover:text-white cursor-pointer"
                                             }`}
                                     >
-                                        {isJoined ? "Unido" : "Unirse a la asociación"}
+                                        {isJoined || user?.admin == 1 ? "Unido" : "Unirse a la asociación"}
                                     </button>
                                 </div>
                             </Link>
