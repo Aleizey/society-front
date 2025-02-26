@@ -2,7 +2,7 @@ import { Divider, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import CrudManager from "../hooks/CrudManager";
-import PulseElement from "./pulseElements";
+import PulseElement from "./PulseElements42";
 
 const SearchPanel = ({ onClose }) => {
     const [searchParams, setSearchParams] = useSearchParams();
