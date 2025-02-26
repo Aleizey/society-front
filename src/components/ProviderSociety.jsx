@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from 'react';
 import CrudManager from '../hooks/CrudManager';
 import Loading from './Loading';
-import PulseElement from './PulseElements42';
+import PulseElement from './PulseElements';
 
 export const SocietyContext = createContext();
 

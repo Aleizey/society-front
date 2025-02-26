@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import CrudManager from "../hooks/CrudManager";
 import { useAuth } from "../hooks/auth";
 import Loading from "../components/Loading";
-import PulseElement from "../components/PulseElements42";
+import PulseElement from "../components/PulseElements";
 
 const AsociacionPage = () => {
 

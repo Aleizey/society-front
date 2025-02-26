@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/auth";
 import CrudManager from "../../hooks/CrudManager";
 import { Link } from "react-router";
 import { Divider } from "@mui/material";
-import PulseElement from "../../components/PulseElements42";
+import PulseElement from "../../components/PulseElements";
 
 const MisAsociaciones = () => {
 
