@@ -22,11 +22,11 @@ const GestorProductos = () => {
         // viewImagenProduct({ setData: setProductos, setLoading, setErrors: setError });
     }, []);
 
-    const [addProduct, setAddProduct] = useState(null);
-    const [removeProduct, setRemoveProduct] = useState(null);
-    const [editProduct, setEditProduct] = useState(null);
+    const [addProduct, setAddProduct] = useState(false);
+    const [removeProduct, setRemoveProduct] = useState(false);
+    const [editProduct, setEditProduct] = useState(false);
 
-    if (addProduct) { OverflowBody(addProduct) }
+    OverflowBody(addProduct)
     if (removeProduct) { OverflowBody(removeProduct) }
     if (editProduct) { OverflowBody(editProduct) }
 
@@ -37,13 +37,13 @@ const GestorProductos = () => {
         <>
 
             {addProduct && (
-                <AddProduct onClose={() => setAddProduct(null)} asociacionId={params.id} />
+                <AddProduct onClose={() => setAddProduct(false)} asociacionId={params.id} />
             )}
             {removeProduct && (
-                <RemoveProduct productId={removeProduct} onClose={() => setRemoveProduct(null)} />
+                <RemoveProduct productId={removeProduct} onClose={() => setRemoveProduct(false)} />
             )}
             {editProduct && (
-                <EditProduct productFull={editProduct} onClose={() => setEditProduct(null)} />
+                <EditProduct productFull={editProduct} onClose={() => setEditProduct(false)} />
             )}
 
             <div>
