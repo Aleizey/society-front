@@ -59,7 +59,7 @@ function App() {
             <Route path="/admin/users/:id/show" element={<ShowUsers />} />
             <Route path="/admin/users/:id/actualizar" element={<UpdateUsers />} />
             {/* asociacion */}
-            <Route path="/admin/asociacion" element={<AdminAsociacion />} />     
+            <Route path="/admin/asociacion" element={<AdminAsociacion />} />
 
             <Route element={<AdminRoute />}>
               <Route path="/admin/" element={<MyAdmin />} />
@@ -72,7 +72,7 @@ function App() {
               {/* asociacion */}
               <Route path="/admin/asociaciones" element={<AdminAsociacion />} />
             </Route>
-             {/* Carrito Vistas */}
+            {/* Carrito Vistas */}
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/carrito/pay" element={<PayView />} />
             <Route path="/carrito/envio" element={<EnvioCarrito />} />
