@@ -2,10 +2,6 @@ import axios from 'lib/axios'
 
 export default function CrudManager({ url }) {
 
-    const headers = {
-        'Content-Type': 'application/json',
-        "Content-Type": "multipart/form-data",
-    };
 
     const views = ({ setData, setLoading, setErrors, navigate }) => {
         setLoading(true);
@@ -26,7 +22,7 @@ export default function CrudManager({ url }) {
         setErrors([]);
         setStatus(null);
         return axios
-            .post(url, props.data, headers)
+            .post(url, props.data)
             .then((res) => {
                 setStatus("success");
                 return res.data;
