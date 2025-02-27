@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ admin }) => {
     return (
         <>
             <div className={`hidden md:relative grid-cols-3 col-span-3 items-center md:grid text-gray-500`}>
