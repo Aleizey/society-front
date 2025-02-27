@@ -8,76 +8,89 @@ import OverflowBody from "../components/OverflowBody";
 import CrudManager from "../hooks/CrudManager";
 import { useAuth } from "../hooks/auth";
 import axios from "axios";
+import { DatasetSharp } from "@mui/icons-material";
 
 let controller = 0;
 function Producto() {
 
     const params = useParams();
+    const navigate = useNavigate();
 
     // Server
     // const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
 
     // Local
-    const { views } = CrudManager({ url: `http://localhost:8000/api/productos/${params.id}` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/productos/${params.id}` });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [dataPedido, setDataPedido] = useState([]);
-
+    const [enCarrito, setEnCarrito] = useState(false);
     const [comment, setComment] = useState(null);
-    // const [value, setValue] = useState(2);
-    OverflowBody(comment)
+    const [react, setReact] = useState(0);
+
+    OverflowBody(comment);
 
     useEffect(() => {
-        views({ setData: setProductos, setLoading, setErrors: setError });
+        views({ setData: setProductos, setLoading, setErrors: setError, navigate });
     }, []);
-
-    // ----------------------------------------------------------
 
     const { user } = useAuth({ middleware: 'auth' });
     const idUser = user?.id;
 
     useEffect(() => {
-        if (user?.id !== undefined && controller === 0) {
-            controller = 1;
+        if (!idUser || controller !== 0) return;
 
-            axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
-                .then(pedido => {
-                    setDataPedido(pedido.data.data);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    setError(error);
-                    setLoading(false);
-                });
-        }
-    }, [user, idUser]);
+        controller = 1;
+        setLoading(true);
+        axios.get(`https://adrian.informaticamajada.es/api/usuarios/${idUser}/pedidos`)
+            .then(response => {
+                const pedidoCarrito = response.data.data.find(p => p.estado === "carrito");
+                if (pedidoCarrito) {
+                    setDataPedido([pedidoCarrito]);
+                }
+            })
+            .catch(setError)
+            .finally(() => setLoading(false));
+    }, [idUser]);
+
+    useEffect(() => {
+        if (!dataPedido.length || !dataPedido[0]?.id) return;
+
+        setLoading(true);
+        axios.get(`https://adrian.informaticamajada.es/api/pedidos/${dataPedido[0].id}/productos/${params.id}`)
+
+            .then(response => {
+                if (response.status === 200) setEnCarrito(true);
+            })
+            .catch(() => setEnCarrito(false))
+            .finally(() => setLoading(false));
+    }, [dataPedido]);
+
+    useEffect(() => {
+    }, [react]);
 
     const aniadirCarrito = () => {
-        setLoading(true); // Activa el estado de carga
+        if (!dataPedido.length || !dataPedido[0]?.id) return;
 
-        axios.post(`http://localhost:8000/api/pedidos/${dataPedido[0]?.id}/productos/associate`, {
-            related_key: params.id // Envía el ID del producto que deseas asociar al pedido
+        setLoading(true);
+        axios.post(`https://adrian.informaticamajada.es/api/pedidos/${dataPedido[0].id}/productos/associate`, {
+            related_key: params.id
         })
-            .then(response => {
-                setLoading(false);
-            })
-            .catch(error => {
-                // Maneja el error
-                setError(error);
-                setLoading(false);
-                console.error("Error al asociar productos al pedido:", error);
-            });
+            .then(() => setEnCarrito(true))
+            .catch(setError)
+            .finally(() => setLoading(false));
     };
 
+
     if (error) return <p> Error </p>;
-    if (loading) return <p> Cargando </p>;
+    if (loading);
 
     return (
         <>
             {comment && (
-                <ModalComment comment={comment} onClose={() => setComment(null)} productos={productos} />
+                <ModalComment comment={setReact} onClose={() => setComment(null)} productos={productos} />
             )}
 
             <div className="w-full px-4 py-8">
@@ -85,17 +98,17 @@ function Producto() {
 
                     {/* Div de imagenes */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 relative px-4 mb-8 col-span-2">
-                        <img src={productos.imagenPrincipal} alt="Product"
+                        <img src={productos.imagenPrincipal ? productos.imagenPrincipal : "https://answers-afd.microsoft.com/static/images/image-not-found.jpg"} alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Product"
+                        <img src="https://answers-afd.microsoft.com/static/images/image-not-found.jpg" alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Product"
+                        <img src="https://answers-afd.microsoft.com/static/images/image-not-found.jpg" alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Product"
+                        <img src="https://answers-afd.microsoft.com/static/images/image-not-found.jpg" alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Product"
+                        <img src="https://answers-afd.microsoft.com/static/images/image-not-found.jpg" alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
-                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Product"
+                        <img src="https://answers-afd.microsoft.com/static/images/image-not-found.jpg" alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
                     </div>
 
@@ -163,15 +176,21 @@ function Producto() {
                                         {/* <Link className="bg-blue-500 px-2 py-0.5 font-semibold text-sm rounded-sm text-white" to={`/asociacion/${productos.asociacion_id}`}> Go Asociacion </Link> */}
                                     </div>
 
-                                    <button onClick={aniadirCarrito} disabled={loading}>
-                                        <Link
-                                            className="bg-sky-600 flex col-span-2 gap-2 items-center justify-center text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 py-2.5 w-full focus:ring-offset-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
-                                                <path d="M12 4.5v15m7.5-7.5h-15" />
-                                            </svg>
-                                            AÑADIR
-                                        </Link>
+                                    <button
+                                        onClick={aniadirCarrito}
+                                        disabled={enCarrito} // Deshabilita el botón si el producto está en el carrito
+                                        className={`bg-sky-600 flex col-span-2 gap-2 items-center justify-center text-white 
+                hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 
+                py-2.5 w-full focus:ring-offset-2 
+                ${enCarrito ? "opacity-50 cursor-not-allowed" : ""}`} // Estilos cuando está deshabilitado
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
+                                            <path d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                        {loading ? "Cargando..." : enCarrito ? "En carrito" : "Añadir"}
                                     </button>
+
+
                                 </div>
                                 <button type="button" onClick={() => setComment(productos)}
                                     className="bg-gray-300 w-full justify-center cursor-pointer flex gap-2 items-center  text-gray-800 px-6 py-2.5 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" >
@@ -187,7 +206,7 @@ function Producto() {
                             {/* <div className="flex items-center mb-4">
 
                             </div> */}
-                            <Rating name="read-only" value={3} readOnly />
+                            <Rating name="read-only" value={react} readOnly />
                             {/*  */}
                             <div>
                                 <div className="flex flex-row justify-between items-center w-full mt-3 border-y-1 hover:italic transition-all cursor-pointer border-gray-300 py-4 text-lg px-1">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CrudManager from "../../hooks/CrudManager";
+import { useNavigate } from "react-router-dom";
 
 const RemoveProduct = ({ productId, onClose }) => {
     const { deletes } = CrudManager({ url: "https://adrian.informaticamajada.es/api/productos" });
@@ -23,7 +24,7 @@ const RemoveProduct = ({ productId, onClose }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/80 bg-opacity-50">
-            <div className="bg-white p-5 rounded-2xl shadow-2xl w-full max-w-md border border-gray-300">
+            <div className="bg-white p-5 rounded-2xl shadow-2xl mx-2 w-full max-w-md border border-gray-300">
                 <div className="flex justify-end">
                     <button onClick={() => onClose(null)} className="text-gray-400 cursor-pointer hover:text-gray-900">
                         ✕

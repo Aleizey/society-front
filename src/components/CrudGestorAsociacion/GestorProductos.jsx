@@ -17,14 +17,15 @@ const GestorProductos = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        views({ setData: setProductos, setLoading, setErrors: setError });
-        // viewImagenProduct({ setData: setProductos, setLoading, setErrors: setError });
-    }, []);
 
     const [addProduct, setAddProduct] = useState(false);
     const [removeProduct, setRemoveProduct] = useState(false);
     const [editProduct, setEditProduct] = useState(false);
+
+    useEffect(() => {
+        views({ setData: setProductos, setLoading, setErrors: setError });
+        // viewImagenProduct({ setData: setProductos, setLoading, setErrors: setError });
+    }, []);
 
     OverflowBody(addProduct)
     if (removeProduct) { OverflowBody(removeProduct) }

@@ -6,95 +6,105 @@ import axios from "axios";
 
 let controller = 0;
 const Carrito = () => {
-        const { user } = useAuth({ middleware: 'auth' });
-        const idUser = user?.id;
-    
-        const [dataPedido, setDataPedido] = useState([]);
-        const [dataProducto, setDataProducto] = useState([]);
-        const [loading, setLoading] = useState(false);
-        const [error, setError] = useState(null);
-        const [precio, setPrecio] = useState(0); // Inicializa el precio en 0
-    
-        // Obtener los pedidos del usuario
-        useEffect(() => {
-            if (user?.id !== undefined && controller === 0) {
-                controller = 1;
-    
-                axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
-                    .then(pedido => {
-                        setDataPedido(pedido.data.data);
-                        setLoading(false);
-                    })
-                    .catch(error => {
-                        setError(error);
-                        setLoading(false);
+    const { user } = useAuth({ middleware: 'auth' });
+    const idUser = user?.id;
+
+    const [dataPedido, setDataPedido] = useState([]);
+    const [dataProducto, setDataProducto] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [precio, setPrecio] = useState(0); // Inicializa el precio en 0
+
+    // Obtener los pedidos del usuario
+    useEffect(() => {
+        if (!idUser) return;
+
+        setLoading(true);
+        axios.get(`https://adrian.informaticamajada.es/api/usuarios/${idUser}/pedidos`)
+            .then(response => {
+                setDataPedido(response.data.data);
+            })
+            .catch(error => {
+                setError(error);
+            })
+            .finally(() => setLoading(false));
+    }, [idUser]);
+
+    // Obtener los productos del pedido
+    useEffect(() => {
+        if (dataPedido.length === 0) return;
+
+        setLoading(true);
+        let productosTotales = [];
+
+        const fetchProductos = async () => {
+            try {
+                const promises = dataPedido
+                    .filter(pedido => pedido.estado === 'carrito')
+                    .map(async (pedido) => {
+                        const response = await axios.get(`https://adrian.informaticamajada.es/api/pedidos/${pedido.id}/productos`);
+                        return response.data.data;
                     });
+
+                const resultados = await Promise.all(promises);
+                productosTotales = resultados.flat(); // Aplanar los arrays de productos
+                setDataProducto(productosTotales);
+            } catch (err) {
+                setError(err);
+            } finally {
+                setLoading(false);
             }
-        }, [user, idUser]);
-    
-        // Obtener los productos del pedido
-        useEffect(() => {
-            if (dataPedido.length === 1 && controller === 1) {
-                controller = 2;
-    
-                axios.get(`http://localhost:8000/api/pedidos/${dataPedido[0]?.id}/productos`)
-                    .then(pedido => {
-                        setDataProducto(pedido.data.data);
-                        setLoading(false);
-                    })
-                    .catch(error => {
-                        setError(error);
-                        setLoading(false);
-                    });
-            }
-        }, [dataPedido]);
-    
-        // Calcular el precio total
-        useEffect(() => {
-            if (dataProducto.length > 0) {
-                const total = dataProducto.reduce((sum, producto) => sum + parseFloat(producto.precio), 0);
-                setPrecio(total);
-            }
-        }, [dataProducto]);
-    
-        if (dataProducto.length < 1) return <p>Loading...</p>;
-        if (error) return <p>Error: {error.message}</p>;
-    
-        return (
-            <>
-                <NavbarShop currentStep={0} />
-                <div className="container mx-auto mt-10">
-                    <div className="sm:flex shadow-md my-10">
-                        <div className="w-full sm:w-3/4 bg-white px-10 py-10">
-                            <div className="flex justify-between border-b pb-8">
-                                <h1 className="font-semibold text-2xl">Carrito</h1>
-                                <h2 className="font-semibold text-2xl">{dataProducto.length}</h2>
-                            </div>
-                            {dataProducto.map(datos => (
-                                <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50" key={datos.id}>
-                                    <div className="md:w-4/12 2xl:w-1/4 w-full">
-                                        <img src={datos.imagen} alt="Black Leather Purse" className="h-full object-center object-cover md:block hidden" />
+        };
+
+        fetchProductos();
+    }, [dataPedido]);
+
+    // Calcular el precio total
+    useEffect(() => {
+        if (dataProducto.length > 0) {
+            const total = dataProducto.reduce((sum, producto) => sum + parseFloat(producto.precio), 0);
+            setPrecio(total);
+        }
+    }, [dataProducto]);
+
+    if (!dataProducto) { return <p>Loading...</p>}
+    if (error) return <p>Error: {error.message}</p>;
+
+    return (
+        <>
+            <NavbarShop currentStep={0} />
+            <div className="container mx-auto mt-10">
+                <div className="sm:flex shadow-md my-10">
+                    <div className="w-full sm:w-3/4 bg-white px-10 py-10">
+                        <div className="flex justify-between border-b pb-8">
+                            <h1 className="font-semibold text-2xl">Carrito</h1>
+                            <h2 className="font-semibold text-2xl">{dataProducto.length}</h2>
+                        </div>
+                        {!dataProducto ? <p> No hay productos </p> : dataProducto.map(datos => (
+                            <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50" key={datos.id}>
+                                <div className="md:w-4/12 2xl:w-1/4 w-full">
+                                    <img src={datos.imagen} alt="Black Leather Purse" className="h-full object-center object-cover md:block hidden" />
+                                </div>
+                                <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
+                                    <div className="flex items-center justify-between w-full">
+                                        <p className="text-base font-black leading-none text-gray-800"> {datos.nombre} </p>
+                                        <select aria-label="Select quantity" className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
+                                            <option>01</option>
+                                            <option>02</option>
+                                            <option>03</option>
+                                        </select>
                                     </div>
-                                    <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-                                        <div className="flex items-center justify-between w-full">
-                                            <p className="text-base font-black leading-none text-gray-800"> {datos.nombre} </p>
-                                            <select aria-label="Select quantity" className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
-                                                <option>01</option>
-                                                <option>02</option>
-                                                <option>03</option>
-                                            </select>
+                                    <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
+                                    <p className="w-96 text-xs leading-3 text-gray-600"> {datos.descripcion} </p>
+                                    <div className="flex items-center justify-between pt-5">
+                                        <div className="flex itemms-center">
+                                            <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
                                         </div>
-                                        <p className="text-xs leading-3 text-gray-600 pt-2">Height: 10 inches</p>
-                                        <p className="w-96 text-xs leading-3 text-gray-600"> {datos.descripcion} </p>
-                                        <div className="flex items-center justify-between pt-5">
-                                            <div className="flex itemms-center">
-                                                <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
-                                            </div>
-                                            <p className="text-base font-black leading-none text-gray-800"> {datos.precio} € </p>
-                                        </div>
+                                        <p className="text-base font-black leading-none text-gray-800"> {datos.precio} € </p>
                                     </div>
                                 </div>
-                            ))}
+                            </div>
+                        ))}
                         <a href="#" className="flex font-semibold text-indigo-600 text-sm mt-10">
                             <svg className="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
                                 <path
