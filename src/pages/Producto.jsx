@@ -43,7 +43,7 @@ function Producto() {
 
         controller = 1;
         setLoading(true);
-        axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
+        axios.get(`https://adrian.informaticamajada.es/api/usuarios/${idUser}/pedidos`)
             .then(response => {
                 const pedidoCarrito = response.data.data.find(p => p.estado === "carrito");
                 if (pedidoCarrito) {
@@ -58,7 +58,7 @@ function Producto() {
         if (!dataPedido.length || !dataPedido[0]?.id) return;
 
         setLoading(true);
-        axios.get(`http://localhost:8000/api/pedidos/${dataPedido[0].id}/productos/${params.id}`)
+        axios.get(`https://adrian.informaticamajada.es/api/pedidos/${dataPedido[0].id}/productos/${params.id}`)
 
             .then(response => {
                 if (response.status === 200) setEnCarrito(true);
@@ -71,7 +71,7 @@ function Producto() {
         if (!dataPedido.length || !dataPedido[0]?.id) return;
 
         setLoading(true);
-        axios.post(`http://localhost:8000/api/pedidos/${dataPedido[0].id}/productos/associate`, {
+        axios.post(`https://adrian.informaticamajada.es/api/pedidos/${dataPedido[0].id}/productos/associate`, {
             related_key: params.id
         })
             .then(() => setEnCarrito(true))

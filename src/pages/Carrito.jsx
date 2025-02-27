@@ -20,7 +20,7 @@ const Carrito = () => {
         if (!idUser) return;
 
         setLoading(true);
-        axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
+        axios.get(`https://adrian.informaticamajada.es/api/usuarios/${idUser}/pedidos`)
             .then(response => {
                 setDataPedido(response.data.data);
             })
@@ -42,7 +42,7 @@ const Carrito = () => {
                 const promises = dataPedido
                     .filter(pedido => pedido.estado === 'carrito')
                     .map(async (pedido) => {
-                        const response = await axios.get(`http://localhost:8000/api/pedidos/${pedido.id}/productos`);
+                        const response = await axios.get(`https://adrian.informaticamajada.es/api/pedidos/${pedido.id}/productos`);
                         return response.data.data;
                     });
 
