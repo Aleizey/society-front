@@ -4,6 +4,7 @@ import CrudManager from "../hooks/CrudManager";
 import PulseElements from "../components/PulseElements";
 
 const Marketplace = () => {
+
     const [page, setPage] = useState(1);
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
