@@ -3,7 +3,7 @@ import CrudManager from "../../../hooks/CrudManager";
 import OverflowBody from "../../../components/OverflowBody";
 import Loading from "../../../components/Loading";
 import { Link, Route, Routes } from "react-router";
-import PulseElement from "../../../components/pulseElements";
+import PulseElements from "../../../components/PulseElements";
 
 const AdminUsers = () => {
 
@@ -23,7 +23,7 @@ const AdminUsers = () => {
         fetchData();
     }, []);
 
-    if (loading) return <PulseElement />;
+    if (loading) return <PulseElements />;
     if (error) return <div className="text-red-500 text-center">Error: {error}</div>;
 
     return (

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const PulseElement = () => {
+const PulseElements = () => {
     const [visibleItems, setVisibleItems] = useState(0);
 
     useEffect(() => {
@@ -33,4 +33,4 @@ const PulseElement = () => {
     );
 };
 
-export default PulseElement;
+export default PulseElements;
