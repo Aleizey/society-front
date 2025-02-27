@@ -30,13 +30,13 @@ const PostComment = ({ product }) => {
 
                 <div className="space-y-4">
                     {myComments.map(comment => {
-                        const usuario = user.find(user => user.id === comment.user_id);
+                        const usuario = user?.find(user => user.id === comment.user_id);
                         return (
                             <>
                                 <div className="bg-white p-4 rounded-lg shadow">
                                     <div className="flex items-center space-x-2.5">
                                         <Avatar
-                                            alt={usuario.name}
+                                            alt={usuario?.name}
                                             src="/static/images/avatar/1.jpg"
                                             sx={{
                                                 width: 40,
@@ -45,7 +45,7 @@ const PostComment = ({ product }) => {
                                             }}
                                         />
                                         <div>
-                                            <h3 className="font-semibold">{usuario.name}</h3>
+                                            <h3 className="font-semibold">{usuario?.name}</h3>
                                             <p className="text-sm text-gray-500">{comment.created_at.slice(0, 10)}</p>
                                         </div>
                                     </div>
