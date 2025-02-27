@@ -1,35 +1,40 @@
 import axios from 'lib/axios'
+import { useNavigate } from 'react-router';
 
 export default function CrudManager({ url }) {
 
-    const credential = {
-        'Content-Type': 'application/json',
-
-    }
-
-    const views = ({ setData, setLoading, setErrors }) => {
+    const views = ({ setData, setLoading, setErrors, navigate }) => {
         setLoading(true);
         axios
             .get(url)
-            .then(res => { setData(res.data.data); })
+            .then(res => { setData(res.data.data ?? res.data); })
             .catch(error => {
-                setErrors(
-                    Object.values(error.response.data.errors).flat());
+                setErrors(Object.values(error.response?.data?.errors ?? {}).flat());
+                navigate("/");
             })
             .finally(() => { setLoading(false); });
     };
 
-    const creates = async ({ setErrors, setStatus, ...props }) => {
+    const creates = ({ setErrors, setStatus, ...props }) => {
+        console.log("comenzando...")
+        console.log("datos para crear:", props.data)
         setErrors([]);
         setStatus(null);
-        axios
-            .post(url, props, credential)
-            .then(res => res.data)
-            .catch(error => {
-                setErrors(
-                    Object.values(error.response.data.errors).flat());
+        return axios
+            .post(url, props.data)
+            .then((res) => {
+                setStatus("success");
+                return res.data;
+            })
+            .catch((error) => {
+                if (error.response && error.response.data.errors) {
+                    setErrors(Object.values(error.response.data.errors).flat());
+                }
+                setStatus("error");
+                throw error;
             });
     };
+
 
     const updates = async ({ setErrors, setStatus, ...props }) => {
         console.log("comenzando...")
@@ -37,7 +42,7 @@ export default function CrudManager({ url }) {
         setErrors([]);
         setStatus(null);
         axios
-            .put(url, props.product, credential)
+            .put(url, props.product)
             .then(res => res.data)
             .catch(error => {
                 setErrors(
@@ -47,9 +52,9 @@ export default function CrudManager({ url }) {
 
     const deletes = async ({ setErrors, setStatus, ElementId }) => {
         setErrors([]);
-        setStatus(null);
+        setStatus(true);
         axios
-            .delete(`${url}/${ElementId}`, credential)
+            .delete(`${url}/${ElementId}`,)
             .then(res => res.data)
             .catch(error => {
                 setErrors(

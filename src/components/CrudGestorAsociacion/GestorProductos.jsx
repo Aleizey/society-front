@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { Link, useParams } from "react-router-dom";
 import OverflowBody from "../OverflowBody";
 import { useEffect, useState } from "react";
 import AddProduct from "../CrudProduct/AddProduct";
@@ -17,16 +17,17 @@ const GestorProductos = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+
+    const [addProduct, setAddProduct] = useState(false);
+    const [removeProduct, setRemoveProduct] = useState(false);
+    const [editProduct, setEditProduct] = useState(false);
+
     useEffect(() => {
         views({ setData: setProductos, setLoading, setErrors: setError });
         // viewImagenProduct({ setData: setProductos, setLoading, setErrors: setError });
     }, []);
 
-    const [addProduct, setAddProduct] = useState(null);
-    const [removeProduct, setRemoveProduct] = useState(null);
-    const [editProduct, setEditProduct] = useState(null);
-
-    if (addProduct) { OverflowBody(addProduct) }
+    OverflowBody(addProduct)
     if (removeProduct) { OverflowBody(removeProduct) }
     if (editProduct) { OverflowBody(editProduct) }
 
@@ -37,13 +38,13 @@ const GestorProductos = () => {
         <>
 
             {addProduct && (
-                <AddProduct onClose={() => setAddProduct(null)} asociacionId={params.id} />
+                <AddProduct onClose={() => setAddProduct(false)} asociacionId={params.id} />
             )}
             {removeProduct && (
-                <RemoveProduct productId={removeProduct} onClose={() => setRemoveProduct(null)} />
+                <RemoveProduct productId={removeProduct} onClose={() => setRemoveProduct(false)} />
             )}
             {editProduct && (
-                <EditProduct productFull={editProduct} onClose={() => setEditProduct(null)} />
+                <EditProduct productFull={editProduct} onClose={() => setEditProduct(false)} />
             )}
 
             <div>

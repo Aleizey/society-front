@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
-import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CrudManager from "../hooks/CrudManager";
 
 const Marketplace = () => {
