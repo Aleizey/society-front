@@ -67,7 +67,7 @@ const Carrito = () => {
         }
     }, [dataProducto]);
 
-    if (dataProducto.length < 1) return <p>Loading...</p>;
+    if (!dataProducto) { return <p>Loading...</p>}
     if (error) return <p>Error: {error.message}</p>;
 
     return (
@@ -80,7 +80,7 @@ const Carrito = () => {
                             <h1 className="font-semibold text-2xl">Carrito</h1>
                             <h2 className="font-semibold text-2xl">{dataProducto.length}</h2>
                         </div>
-                        {dataProducto.map(datos => (
+                        {!dataProducto ? <p> No hay productos </p> : dataProducto.map(datos => (
                             <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50" key={datos.id}>
                                 <div className="md:w-4/12 2xl:w-1/4 w-full">
                                     <img src={datos.imagen} alt="Black Leather Purse" className="h-full object-center object-cover md:block hidden" />
