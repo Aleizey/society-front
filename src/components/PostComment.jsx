@@ -30,7 +30,7 @@ const PostComment = ({ product }) => {
 
                 <div className="space-y-4">
                     {myComments.map(comment => {
-                        const usuario = user?.find(user => user?.id === comment?.user_id);
+                        const usuario = user?.find(user => user.id === comment.user_id);
                         return (
                             <>
                                 <div className="bg-white p-4 rounded-lg shadow">
