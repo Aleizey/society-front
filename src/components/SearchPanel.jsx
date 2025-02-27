@@ -2,7 +2,7 @@ import { Divider, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import CrudManager from "../hooks/CrudManager";
-import PulseElement from "./pulseElements";
+import PulseElements from "./PulseElements";
 
 const SearchPanel = ({ onClose }) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -30,8 +30,13 @@ const SearchPanel = ({ onClose }) => {
 
     return (
         <div className="fixed inset-0 flex flex-col z-200 justify-start bg-gray-100 bg-opacity-50 select-none">
-            <div className="w-full flex items-center flex-row">
+            <div className="w-full flex items-center flex-row shadow-2xl">
                 <TextField
+                    sx={
+                        {
+                            background: "white",
+                        }
+                    }
                     className="w-full"
                     id="standard-basic"
                     name="filter"
@@ -40,7 +45,7 @@ const SearchPanel = ({ onClose }) => {
                     label="Buscador"
                     variant="standard"
                 />
-                <span className="bg-gray-400 text-white p-3 cursor-pointer hover:bg-amber-200 transition-all" onClick={() => onClose()}>
+                <span className="bg-black text-white p-3 cursor-pointer hover:bg-sky-900 transition-all" onClick={() => onClose()}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
@@ -49,7 +54,7 @@ const SearchPanel = ({ onClose }) => {
             </div>
 
             {loading ? (
-                <PulseElement />
+                <PulseElements />
             ) : error ? (
                 <p className="text-center text-red-500">Error al cargar los datos</p>
             ) : (

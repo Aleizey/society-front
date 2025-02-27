@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ModalProfile from "./ModalProfile";
 import { useAuth } from "../hooks/auth";
 import SearchPanel from "./SearchPanel";
+import ModalCarrito from "./ModalCarrito";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -24,6 +25,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const Header = () => {
 
     const [modalProfile, setModalProfile] = React.useState(false);
+    const [modalCarrito, setModalModalCarrito] = React.useState(false);
     const { user } = useAuth({ middleware: 'auth' });
 
     const [search, setSearch] = React.useState(false);
@@ -35,8 +37,20 @@ const Header = () => {
         }
         else {
             setModalProfile(true);
+            setModalModalCarrito(false);
         }
 
+    }
+
+    const handleCarrito = () => {
+
+        if (modalCarrito) {
+            setModalModalCarrito(false);
+        }
+        else {
+            setModalModalCarrito(true);
+            setModalProfile(false);
+        }
     }
 
     return (
@@ -72,7 +86,7 @@ const Header = () => {
                             </Search>
                         </div>
                         <div className="relative m-0">
-                            <IconButton aria-label="cart">
+                            <IconButton onClick={user ? () => handleCarrito() : undefined} aria-label="cart">
                                 <StyledBadge badgeContent={4} color="primary">
                                     <ShoppingCartIcon />
                                 </StyledBadge>
@@ -101,6 +115,13 @@ const Header = () => {
                                 <>
                                     {modalProfile && (
                                         <ModalProfile user={user} />
+                                    )}
+                                </>
+                            )}
+                            {user && (
+                                <>
+                                    {modalCarrito && (
+                                        <ModalCarrito user={user} />
                                     )}
                                 </>
                             )}
