@@ -14,12 +14,13 @@ let controller = 0;
 function Producto() {
 
     const params = useParams();
+    const navigate = useNavigate();
 
     // Server
     // const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
 
     // Local
-    const { views } = CrudManager({ url: `http://localhost:8000/api/productos/${params.id}` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/productos/${params.id}` });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ function Producto() {
     OverflowBody(comment);
 
     useEffect(() => {
-        views({ setData: setProductos, setLoading, setErrors: setError });
+        views({ setData: setProductos, setLoading, setErrors: setError, navigate });
     }, []);
 
     const { user } = useAuth({ middleware: 'auth' });
@@ -58,6 +59,7 @@ function Producto() {
 
         setLoading(true);
         axios.get(`http://localhost:8000/api/pedidos/${dataPedido[0].id}/productos/${params.id}`)
+
             .then(response => {
                 if (response.status === 200) setEnCarrito(true);
             })
