@@ -8,6 +8,7 @@ import OverflowBody from "../components/OverflowBody";
 import CrudManager from "../hooks/CrudManager";
 import { useAuth } from "../hooks/auth";
 import axios from "axios";
+import { DatasetSharp } from "@mui/icons-material";
 
 let controller = 0;
 function Producto() {
@@ -25,51 +26,57 @@ function Producto() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [dataPedido, setDataPedido] = useState([]);
-
+    const [enCarrito, setEnCarrito] = useState(false);
     const [comment, setComment] = useState(null);
-    // const [value, setValue] = useState(2);
-    OverflowBody(comment)
+
+    OverflowBody(comment);
 
     useEffect(() => {
         views({ setData: setProductos, setLoading, setErrors: setError, navigate });
     }, []);
 
-    // ----------------------------------------------------------
-
     const { user } = useAuth({ middleware: 'auth' });
     const idUser = user?.id;
 
     useEffect(() => {
-        if (user?.id !== undefined && controller === 0) {
-            controller = 1;
+        if (!idUser || controller !== 0) return;
 
-            axios.get(`https://adrian.informaticamajada.es/api/usuarios/${idUser}/pedidos`)
-                .then(pedido => {
-                    setDataPedido(pedido.data.data);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    setError(error);
-                    setLoading(false);
-                });
-        }
-    }, [user, idUser]);
+        controller = 1;
+        setLoading(true);
+        axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
+            .then(response => {
+                const pedidoCarrito = response.data.data.find(p => p.estado === "carrito");
+                if (pedidoCarrito) {
+                    setDataPedido([pedidoCarrito]);
+                }
+            })
+            .catch(setError)
+            .finally(() => setLoading(false));
+    }, [idUser]);
+
+    useEffect(() => {
+        if (!dataPedido.length || !dataPedido[0]?.id) return;
+
+        setLoading(true);
+        axios.get(`http://localhost:8000/api/pedidos/${dataPedido[0].id}/productos/${params.id}`)
+
+            .then(response => {
+                if (response.status === 200) setEnCarrito(true);
+            })
+            .catch(() => setEnCarrito(false))
+            .finally(() => setLoading(false));
+    }, [dataPedido]);
 
     const aniadirCarrito = () => {
-        setLoading(true); // Activa el estado de carga
+        if (!dataPedido.length || !dataPedido[0]?.id) return;
 
-        axios.post(`https://adrian.informaticamajada.es/api/pedidos/${dataPedido[0]?.id}/productos/associate`, {
-            related_key: params.id // Envía el ID del producto que deseas asociar al pedido
+        setLoading(true);
+        axios.post(`http://localhost:8000/api/pedidos/${dataPedido[0].id}/productos/associate`, {
+            related_key: params.id
         })
-            .then(response => {
-                setLoading(false);
-            })
-            .catch(error => {
-                // Maneja el error
-                setError(error);
-                setLoading(false);
-                console.error("Error al asociar productos al pedido:", error);
-            });
+            .then(() => setEnCarrito(true))
+            .catch(setError)
+            .finally(() => setLoading(false));
     };
 
     if (error) return <p> Error </p>;
@@ -164,15 +171,21 @@ function Producto() {
                                         {/* <Link className="bg-blue-500 px-2 py-0.5 font-semibold text-sm rounded-sm text-white" to={`/asociacion/${productos.asociacion_id}`}> Go Asociacion </Link> */}
                                     </div>
 
-                                    <button onClick={aniadirCarrito} disabled={loading}>
-                                        <Link
-                                            className="bg-sky-600 flex col-span-2 gap-2 items-center justify-center text-white hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 py-2.5 w-full focus:ring-offset-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
-                                                <path d="M12 4.5v15m7.5-7.5h-15" />
-                                            </svg>
-                                            AÑADIR
-                                        </Link>
+                                    <button
+                                        onClick={aniadirCarrito}
+                                        disabled={enCarrito} // Deshabilita el botón si el producto está en el carrito
+                                        className={`bg-sky-600 flex col-span-2 gap-2 items-center justify-center text-white 
+                hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 
+                py-2.5 w-full focus:ring-offset-2 
+                ${enCarrito ? "opacity-50 cursor-not-allowed" : ""}`} // Estilos cuando está deshabilitado
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="size-6">
+                                            <path d="M12 4.5v15m7.5-7.5h-15" />
+                                        </svg>
+                                        {loading ? "Cargando..." : enCarrito ? "En carrito" : "Añadir"}
                                     </button>
+
+
                                 </div>
                                 <button type="button" onClick={() => setComment(productos)}
                                     className="bg-gray-300 w-full justify-center cursor-pointer flex gap-2 items-center  text-gray-800 px-6 py-2.5 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2" >
