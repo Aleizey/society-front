@@ -1,10 +1,7 @@
 import axios from 'lib/axios'
+import { useNavigate } from 'react-router';
 
 export default function CrudManager({ url }) {
-
-    const headers = {
-        'Content-Type': 'application/json',
-    };
 
     const views = ({ setData, setLoading, setErrors, navigate }) => {
         setLoading(true);
@@ -12,8 +9,7 @@ export default function CrudManager({ url }) {
             .get(url)
             .then(res => { setData(res.data.data ?? res.data); })
             .catch(error => {
-                setErrors(
-                    Object.values(error.response.data.errors).flat());
+                setErrors(Object.values(error.response?.data?.errors ?? {}).flat());
                 navigate("/");
             })
             .finally(() => { setLoading(false); });
@@ -25,7 +21,7 @@ export default function CrudManager({ url }) {
         setErrors([]);
         setStatus(null);
         return axios
-            .post(url, props.data, headers)
+            .post(url, props.data)
             .then((res) => {
                 setStatus("success");
                 return res.data;
@@ -46,7 +42,7 @@ export default function CrudManager({ url }) {
         setErrors([]);
         setStatus(null);
         axios
-            .put(url, props.product,)
+            .put(url, props.product)
             .then(res => res.data)
             .catch(error => {
                 setErrors(
@@ -56,15 +52,14 @@ export default function CrudManager({ url }) {
 
     const deletes = async ({ setErrors, setStatus, ElementId }) => {
         setErrors([]);
-        setStatus(true); // Iniciar el estado de carga
-
-        try {
-            await axios.delete(`${url}/${ElementId}`);
-        } catch (error) {
-            setErrors(error.response?.data?.errors ? Object.values(error.response.data.errors).flat() : ["Error desconocido"]);
-        } finally {
-            setStatus(false); // Asegurar que el estado se actualice después de la petición
-        }
+        setStatus(true);
+        axios
+            .delete(`${url}/${ElementId}`,)
+            .then(res => res.data)
+            .catch(error => {
+                setErrors(
+                    Object.values(error.response.data.errors).flat());
+            });
     };
 
     return {

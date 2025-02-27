@@ -13,12 +13,13 @@ let controller = 0;
 function Producto() {
 
     const params = useParams();
+    const navigate = useNavigate();
 
     // Server
     // const { views } = CrudManager({ url: 'https://adrian.informaticamajada.es/api/productos' });
 
     // Local
-    const { views } = CrudManager({ url: `http://localhost:8000/api/productos/${params.id}` });
+    const { views } = CrudManager({ url: `https://adrian.informaticamajada.es/api/productos/${params.id}` });
 
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ function Producto() {
     OverflowBody(comment)
 
     useEffect(() => {
-        views({ setData: setProductos, setLoading, setErrors: setError });
+        views({ setData: setProductos, setLoading, setErrors: setError, navigate });
     }, []);
 
     // ----------------------------------------------------------
@@ -42,7 +43,7 @@ function Producto() {
         if (user?.id !== undefined && controller === 0) {
             controller = 1;
 
-            axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
+            axios.get(`https://adrian.informaticamajada.es/api/usuarios/${idUser}/pedidos`)
                 .then(pedido => {
                     setDataPedido(pedido.data.data);
                     setLoading(false);
@@ -57,7 +58,7 @@ function Producto() {
     const aniadirCarrito = () => {
         setLoading(true); // Activa el estado de carga
 
-        axios.post(`http://localhost:8000/api/pedidos/${dataPedido[0]?.id}/productos/associate`, {
+        axios.post(`https://adrian.informaticamajada.es/api/pedidos/${dataPedido[0]?.id}/productos/associate`, {
             related_key: params.id // Envía el ID del producto que deseas asociar al pedido
         })
             .then(response => {
