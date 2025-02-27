@@ -52,14 +52,17 @@ function AddProduct({ onClose, asociacionId }) {
     return (
         <div className="fixed inset-0 z-200 flex justify-center items-center bg-black/80 bg-opacity-50 select-none">
 
-            <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md border border-gray-300">
-                <div className="flex justify-end">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl md:max-w-3xl overflow-hidden md:scale-100 scale-75 border border-gray-300">
+                <div className="flex flex-row justify-between mb-6 items-center">
+                    <h2 className="text-xl font-medium text-center text-sky-300">Crear Producto</h2>
                     <button onClick={() => onClose(null)} className="text-gray-400 cursor-pointer hover:text-gray-900">
-                        ✕
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                            <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                        </svg>
+
                     </button>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <h2 className="text-3xl font-extrabold mb-6 text-center text-sky-700">Crear Producto</h2>
                     {[
                         { label: "Nombre", name: "nombre", type: "text", required: true },
                         { label: "Descripción", name: "descripcion", type: "textarea", rows: 3 },
@@ -69,14 +72,14 @@ function AddProduct({ onClose, asociacionId }) {
 
                     ].map(({ label, name, type, ...props }) => (
                         <div className="mb-4" key={name}>
-                            <label htmlFor={name} className="block text-gray-700 font-semibold mb-1">{label}</label>
+                            <label htmlFor={name} className="block text-gray-400 font-semibold mb-1">{label}</label>
                             {type === "textarea" ? (
                                 <textarea
                                     id={name}
                                     name={name}
                                     value={product[name]}
                                     onChange={handleChange}
-                                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500"
+                                    className="w-full p-2 border-b-2 border-gray-400 bg-gray-100 focus:ring-2 focus:ring-sky-500"
                                     {...props}
                                 />
                             ) : (
@@ -86,7 +89,7 @@ function AddProduct({ onClose, asociacionId }) {
                                     name={name}
                                     value={product[name]}
                                     onChange={handleChange}
-                                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500"
+                                    className="w-full p-2 border-b-2 bg-gray-100 border-gray-400 focus:ring-2 focus:ring-sky-500"
                                     {...props}
                                 />
                             )}
@@ -105,26 +108,28 @@ function AddProduct({ onClose, asociacionId }) {
                     </div>
                     {isClothing && (
                         <>
-                            {[
-                                { label: "Talla", name: "size", options: ["S", "M", "L", "XL"] },
-                                { label: "Color", name: "color", options: ["Rojo", "Azul", "Verde", "Negro"] },
-                            ].map(({ label, name, options }) => (
-                                <div className="mb-4" key={name}>
-                                    <label htmlFor={name} className="block text-gray-800 font-semibold mb-1">{label}</label>
-                                    <select
-                                        id={name}
-                                        name={name}
-                                        value={product[name]}
-                                        onChange={handleChange}
-                                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500"
-                                    >
-                                        <option value="">Selecciona {label.toLowerCase()}</option>
-                                        {options.map((option) => (
-                                            <option key={option} value={option}>{option}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            ))}
+                            <div className="flex md:flex-row justify-between space-x-2">
+                                {[
+                                    { label: "Talla", name: "size", options: ["S", "M", "L", "XL"] },
+                                    { label: "Color", name: "color", options: ["Rojo", "Azul", "Verde", "Negro"] },
+                                ].map(({ label, name, options }) => (
+                                    <div className="mb-4 w-full" key={name}>
+                                        <label htmlFor={name} className="block  text-gray-800 font-semibold mb-1">{label}</label>
+                                        <select
+                                            id={name}
+                                            name={name}
+                                            value={product[name]}
+                                            onChange={handleChange}
+                                            className="w-full p-2 border-b-2 border-gray-400 bg-gray-100 focus:ring-2 focus:ring-sky-500"
+                                        >
+                                            <option value="">Selecciona {label.toLowerCase()}</option>
+                                            {options.map((option) => (
+                                                <option key={option} value={option}>{option}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                ))}
+                            </div>
                         </>
                     )}
                     <div className="mb-4">
@@ -135,12 +140,12 @@ function AddProduct({ onClose, asociacionId }) {
                             name="image"
                             accept="image/*"
                             onChange={handleChange}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500"
+                            className="w-full p-2 border-b-2 border-gray-400 bg-sky-100  focus:ring-2 focus:ring-sky-500"
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-sky-500 text-white p-3 rounded-lg hover:bg-sky-600 transition duration-300 font-semibold"
+                        className="w-full bg-sky-500 text-white p-2 rounded-full hover:bg-sky-600 transition duration-300 font-semibold"
                     >
                         Crear Producto
                     </button>

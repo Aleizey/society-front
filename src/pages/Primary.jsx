@@ -43,10 +43,10 @@ const Primary = () => {
     return (
         <>
             {asociaciones.length > 0 && (
-                <div className="mt-4 text-center top-21 p-2 sticky z-10 ">
+                <div className="mt-4 text-center top-21 p-2 sticky md:space-y-0 space-y-1.5">
                     <button
                         onClick={() => setordenar(ordenar === "asc" ? "desc" : "asc")}
-                        className="bg-sky-200 text-sky-800 px-4 py-2 rounded-full mr-2 cursor-pointer shadow-2xl "
+                        className="bg-sky-200 text-sky-800 px-4 py-2 rounded-full md:mr-2 cursor-pointer shadow-2xl "
                     >
                         Ordenar por Nombre - {ordenar === "asc" ? "A/z" : "Z/a"}
                     </button>
@@ -78,6 +78,8 @@ const Primary = () => {
 
                         const isJoined =
                             asoUsers[dataAso.id]?.some((e) => e.id === user?.id || e.id === dataAso.user_id) ?? false;
+
+                        const gestor = dataAso.user_id === user?.id;
 
                         return (
                             <Link
@@ -112,15 +114,15 @@ const Primary = () => {
                                 <div
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        if (!isJoined || !user?.admin == 1) handleClick();
+                                        if (!isJoined || !user?.id == gestor) handleClick();
                                     }}
                                     className="flex justify-between py-1.5 px-1.5"
                                 >
                                     <button
-                                        className={`bg-sky-200 text-sky-500 rounded-full text-ellipsis text-nowrap overflow-hidden font-bold p-2 w-full transition-all ${isJoined || user?.admin == true ? "cursor-not-allowed opacity-50" : "hover:bg-sky-400 hover:text-white cursor-pointer"
+                                        className={`bg-sky-200 text-sky-500 rounded-full text-ellipsis text-nowrap overflow-hidden font-bold p-2 w-full transition-all ${isJoined || gestor ? "cursor-not-allowed opacity-50" : "hover:bg-sky-400 hover:text-white cursor-pointer"
                                             }`}
                                     >
-                                        {isJoined || user?.admin == 1 ? "Unido" : "Unirse a la asociación"}
+                                        {isJoined || gestor ? "Unido" : "Unirse a la asociación"}
                                     </button>
                                 </div>
                             </Link>

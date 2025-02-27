@@ -20,7 +20,7 @@ const Carrito = () => {
             if (user?.id !== undefined && controller === 0) {
                 controller = 1;
     
-                axios.get(`http://localhost:8000/api/usuarios/${idUser}/pedidos`)
+                axios.get(`https://adrian.informaticamajada.es/api/usuarios/${idUser}/pedidos`)
                     .then(pedido => {
                         setDataPedido(pedido.data.data);
                         setLoading(false);
@@ -37,7 +37,7 @@ const Carrito = () => {
             if (dataPedido.length === 1 && controller === 1) {
                 controller = 2;
     
-                axios.get(`http://localhost:8000/api/pedidos/${dataPedido[0]?.id}/productos`)
+                axios.get(`https://adrian.informaticamajada.es/api/pedidos/${dataPedido[0]?.id}/productos`)
                     .then(pedido => {
                         setDataProducto(pedido.data.data);
                         setLoading(false);

@@ -22,7 +22,7 @@ const AdminAsociacion = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [modalAprobar]);
 
     if (loading) return <Loading />;
     if (error) return <div className="text-red-500 text-center">Error: {error}</div>;
