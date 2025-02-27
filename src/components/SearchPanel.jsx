@@ -2,7 +2,7 @@ import { Divider, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import CrudManager from "../hooks/CrudManager";
-import PulseElement from "./PulseElements";
+import PulseElements from "./PulseElements";
 
 const SearchPanel = ({ onClose }) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -49,7 +49,7 @@ const SearchPanel = ({ onClose }) => {
             </div>
 
             {loading ? (
-                <PulseElement />
+                <PulseElements />
             ) : error ? (
                 <p className="text-center text-red-500">Error al cargar los datos</p>
             ) : (

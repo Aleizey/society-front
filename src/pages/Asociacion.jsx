@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import CrudManager from "../hooks/CrudManager";
 import { useAuth } from "../hooks/auth";
 import Loading from "../components/Loading";
-import PulseElement from "../components/PulseElements";
+import PulseElements from "../components/PulseElements";
 
 const AsociacionPage = () => {
 
@@ -48,7 +48,7 @@ const AsociacionPage = () => {
     }));
 
     if (error) return <p> Error </p>;
-    if (loading) return <PulseElement />;
+    if (loading) return <PulseElements />;
     return (
         <>
             {/* contenedor general */}

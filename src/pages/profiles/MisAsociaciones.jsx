@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/auth";
 import CrudManager from "../../hooks/CrudManager";
 import { Link } from "react-router";
 import { Divider } from "@mui/material";
-import PulseElement from "../../components/PulseElements";
+import PulseElements from "../../components/PulseElements";
 
 const MisAsociaciones = () => {
 
@@ -23,7 +23,7 @@ const MisAsociaciones = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    if (loading) return <PulseElement />;
+    if (loading) return <PulseElements />;
 
     const gestor = AsociacionGestor?.filter(asociacion => asociacion.user_id === user?.id) || [];
 
