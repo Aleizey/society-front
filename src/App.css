@@ -18,3 +18,24 @@
 .header {
     box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.1);
 }
+
+.success {
+    animation-name: success;
+    animation-duration: 0.2s;
+    overflow: hidden;
+}
+
+@keyframes success {
+
+    from {
+        transform: scale(0.90);
+        /* filter: blur(5px); */
+    box-shadow: inset 0 -300px 0 0 rgba(255, 255, 255, 0.805);
+    }
+    to {
+        transform: scale(1.005);    
+    }
+
+
+    
+}

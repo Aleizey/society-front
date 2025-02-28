@@ -83,7 +83,7 @@ const AsociacionPage = () => {
 
                                 <div className="flex flex-row space-x-1.5 col-span-2">
                                     <div className="size-30 flex shrink-0 rounded-2xl border-3 border-white overflow-hidden">
-                                        <img className="w-full h-full object-cover" src={asociaciones.imagenPrincipal} alt="" />
+                                        <img className="w-full h-full object-cover" src={asociaciones.logo} alt="" />
                                     </div>
                                     <div className="overflow-hidden ">
                                         <p className="flex flex-row space-x-2 lg:flex-row lg:items-center items-start text-4xl font-bold">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CrudManager from "../../hooks/CrudManager";
+import Success from "../Success";
 
 const ModalAprobar = ({ idAsociacion, onClose }) => {
 
@@ -7,15 +8,22 @@ const ModalAprobar = ({ idAsociacion, onClose }) => {
 
     const [errors, setErrors] = useState([]);
     const [status, setStatus] = useState(null);
+    const [open, setOpen] = useState(false)
 
     const handleClick = async (e) => {
         e.preventDefault();
         await updates({ setErrors, setStatus });
-        onClose();
+        setOpen(true)
+        setTimeout(() => {
+            onClose();
+        }, 500);
     };
 
     return (
         <>
+            {open && (
+                <Success />
+            )}
             <div className=" fixed inset-0 z-200 flex justify-center items-center bg-black/80 bg-opacity-50 select-none">
                 <div className="bg-white m-2 w-120 h-80 flex flex-col justify-between overflow-hidden rounded-xl p-3 pt-2">
                     <div className="flex flex-col my-auto items-center text-green-800 justify-center text-center text-lg space-y-5 font-medium">

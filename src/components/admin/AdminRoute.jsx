@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/auth";
 const AdminRoute = () => {
     const { user, isLoading } = useAuth({ middleware: 'auth' });
 
-    console.log("Usuario cargado:", user, "Cargando:", isLoading);
+    // console.log("Usuario cargado:", user, "Cargando:", isLoading);
 
     if (isLoading || user === undefined) {
         return <div>Cargando...</div>;
