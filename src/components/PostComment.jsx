@@ -24,13 +24,14 @@ const PostComment = ({ product }) => {
     if (error) { return <div>Error...</div> }
 
     return (
+        
         <section className="bg-gray-100 py-8">
-            <div className="container mx-auto px-4">
+            <div className="mx-auto px-4">
                 <h2 className="text-2xl font-bold mb-4">Los Comentarios</h2>
 
                 <div className="space-y-4">
                     {myComments.map(comment => {
-                        const usuario = user?.find(user => user.id === comment.user_id);
+                        const usuario = user.find(user => user.id === comment.user_id);
                         return (
                             <>
                                 <div className="bg-white p-4 rounded-lg shadow">

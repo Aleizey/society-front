@@ -60,7 +60,7 @@ const Primary = () => {
             )}
 
             {ordenarAsocion.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center md:gap-8 gap-2 mt-4 lg:px-8 px-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center md:gap-8 gap-2 my-4 lg:px-8 px-2">
                     {ordenarAsocion.map((dataAso) => {
                         const { creates } = CrudManager({
                             url: `https://adrian.informaticamajada.es/api/asociaciones/${dataAso.id}/users/associate`,

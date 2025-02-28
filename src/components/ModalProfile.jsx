@@ -7,7 +7,7 @@ const ModalProfile = ({ user }) => {
     const { logout } = useAuth()
     return (
         <>
-            <div className="fixed bg-white p-3 rounded-lg right-2.5 mt-0.5 shadow-2xl border-1 border-gray-200">
+            <div className="fixed z-20 bg-white p-3 rounded-lg right-2.5 mt-0.5 shadow-2xl border-1 border-gray-200">
                 <div className="flex flex-row justify-start space-x-2 items-center">
                     <Stack direction="row" spacing={2}>
                         <Avatar

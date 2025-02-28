@@ -46,6 +46,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
       .then((response) => {
         setToken(response.data.token);
         mutate();
+        window.location.pathname = '/'
       })
       .catch(error => {
         if (error.response.status !== 422) throw error
