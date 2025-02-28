@@ -2,9 +2,11 @@ import { useAuth } from '../../hooks/auth';
 import { useState } from 'react';
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Logo from '../../resource/images/logo.png';
 const Login = () => {
+
+  const navigate = useNavigate();
 
   const { login } = useAuth({
     middleware: 'guest',
@@ -19,6 +21,7 @@ const Login = () => {
   const submitForm = async event => {
     event.preventDefault()
     login({ email, password, setErrors, setStatus })
+    // (navigate("/"));
 
   }
 
@@ -58,7 +61,7 @@ const Login = () => {
             <Button
               variant="contained"
               type="submit">
-              Iniciar sesion
+              {status ? "cargando..." : "Iniciar sesion"}
             </Button>
 
             <Button
@@ -69,6 +72,7 @@ const Login = () => {
               </Link>
             </Button>
           </div>
+          <p className='text-amber-300'>{errors}</p>
           <div className="flex items-center justify-between gap-8 pt-2">
             <Button>
               Forgot Password?

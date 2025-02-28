@@ -3,6 +3,7 @@ import * as React from 'react';
 import CrudManager from "../hooks/CrudManager";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/auth";
+import Success from "../components/Success";
 
 const currencies = [
     { value: 'Deportiva', label: 'Deportiva' },
@@ -28,6 +29,7 @@ const CreateAsociacion = () => {
 
     const [errors, setErrors] = React.useState([])
     const [status, setStatus] = React.useState(null)
+    const [open, setOpen] = React.useState(false)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -42,14 +44,20 @@ const CreateAsociacion = () => {
 
         creates({ data: asociaciones, setErrors, setStatus })
             .then((data) => {
-                navigate(`/asociacion/${data.data.id}`);
+                setOpen(true)
+                setTimeout(() => {
+                    navigate(`/asociacion/${data.data.id}`);
+                }, 500);
             })
             .catch((error) => { console.error(error); });
     };
 
     return (
         <>
-            <div className="flex flex-row w-full h-screen">
+            {open && (
+                <Success />
+            )}
+            <div className=" flex flex-row w-full">
                 <div className="bg-white shrink-0 w-full md:w-110 md:h-auto h-screen self-start md:sticky fixed top-22 p-4 pt-2 z-2 md:flex flex-col ">
                     <div>
                         <span className="flex text-2xl font-bold mb-5">
@@ -122,7 +130,7 @@ const CreateAsociacion = () => {
                     </div>
                 </div>
                 <div className="bg-gray-200 w-full md:flex hidden justify-center items-start p-5 xl:p-20 xl:pt-10">
-                    <div className="flex flex-col p-6 bg-white shadow-2xl rounded-lg w-full lg:w-[972px]">
+                    <div className="flex flex-col p-6 bg-white shadow-2xl rounded-lg w-full ">
                         <div className="text-md font-medium flex flex-row items-center justify-between">
                             <p>Vista previa Asociación</p>
                             <span className="bg-gray-100 p-2 rounded-full text-gray-400">

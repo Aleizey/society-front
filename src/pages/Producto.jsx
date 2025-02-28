@@ -28,7 +28,6 @@ function Producto() {
     const [dataPedido, setDataPedido] = useState([]);
     const [enCarrito, setEnCarrito] = useState(false);
     const [comment, setComment] = useState(null);
-    const [react, setReact] = useState(0);
 
     OverflowBody(comment);
 
@@ -68,9 +67,6 @@ function Producto() {
             .finally(() => setLoading(false));
     }, [dataPedido]);
 
-    useEffect(() => {
-    }, [react]);
-
     const aniadirCarrito = () => {
         if (!dataPedido.length || !dataPedido[0]?.id) return;
 
@@ -90,14 +86,14 @@ function Producto() {
     return (
         <>
             {comment && (
-                <ModalComment comment={setReact} onClose={() => setComment(null)} productos={productos} />
+                <ModalComment onClose={() => setComment(null)} productos={productos} />
             )}
 
-            <div className="w-full px-4 py-8">
+            <div className="w-full px-4 flex justify-center py-8">
                 <div className="grid md:grid-cols-3 grid-cols-1 w-full -mx-4 relative min-h-screen">
 
                     {/* Div de imagenes */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 relative px-4 mb-8 col-span-2">
+                    <div className="flex flex-row overflow-hidden overflow-x-scroll md:grid md:grid-cols-1 lg:grid-cols-2 gap-1 relative px-4 mb-8 col-span-2">
                         <img src={productos.imagenPrincipal ? productos.imagenPrincipal : "https://answers-afd.microsoft.com/static/images/image-not-found.jpg"} alt="Product"
                             className="w-full h-full object-cover shadow-md rounded-2xl" id="mainImage" />
                         <img src="https://answers-afd.microsoft.com/static/images/image-not-found.jpg" alt="Product"
@@ -120,7 +116,7 @@ function Producto() {
                             </div>
 
                             {/* Descripcion */}
-                            <p className="text-gray-700 w-full mt-15 mb-10"> {productos.descripcion ? productos.descripcion.toUpperCase() : ""} </p>
+                            <p className="text-gray-700 w-full mt-8 mb-10"> {productos.descripcion ? productos.descripcion.toUpperCase() : ""} </p>
 
                             {/* Colores */}
                             <div className="mb-10">
@@ -206,7 +202,7 @@ function Producto() {
                             {/* <div className="flex items-center mb-4">
 
                             </div> */}
-                            <Rating name="read-only" value={react} readOnly />
+                            <Rating name="read-only" value={0} readOnly />
                             {/*  */}
                             <div>
                                 <div className="flex flex-row justify-between items-center w-full mt-3 border-y-1 hover:italic transition-all cursor-pointer border-gray-300 py-4 text-lg px-1">
